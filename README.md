@@ -11,9 +11,10 @@ Do you want to battle it out with your friends and prove who is the master of En
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- Players take turns typing a letter and the game checks if the letters spell a word. If a word is spelled the player who finished the word loses.
+- On your turn you can call bluff if you believe there is no word that starts with those letters. If the other player fails to provide a word, you win.
+- A leaderboard containing the longest words spelt in the game (a list of long words that don't contain a prefix that is a word itself).
+- A menu where you may press start game or join game, if you press start game you get a code and if you press join you must enter a code.
 
 ### Technologies
 
@@ -36,9 +37,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [X] I completed the prerequisites for this deliverable (Git commit requirement)
 - [X] Proper use of Markdown
 - [X] A concise and compelling elevator pitch
-- [ ] Description of key features
-- [ ] Description of how you will use each technology including your 3rd party API and use of WebSocket
-- [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
+- [X] Description of key features
+- [X] Description of how you will use each technology including your 3rd party API and use of WebSocket
+- [X] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ## 🚀 AWS deliverable
 
