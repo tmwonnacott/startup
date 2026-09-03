@@ -2,7 +2,7 @@
 
 ### Elevator pitch
 
-Do you want to battle it out with your friends and prove who is the master of English? In NeverWord your goal is to never spell a word, but don't spell a never-word. A never-word is a group of letters that can never become a word, like "Qezx." You and your opponent take turns naming letters until 1) someone spells a real word and loses or 2) someone calls bluff.  When someone calls bluff, the opponent has to say what word can be spelt with the current letters, if they can't think of anything, they lose.
+Do you want to battle it out with your friends and prove who is the master of English? In NeverWord your goal is to never spell a word, but don't spell a never-word. A never-word is a group of letters that can never become a word, like "Qezx." You and your opponent take turns adding letters until 1) someone spells a real word and loses or 2) someone calls bluff. When someone calls bluff, the opponent has to say what word can be spelled starting with the current letters, if they can't think of anything, they lose.
 
 ### Design
 
@@ -20,12 +20,12 @@ Do you want to battle it out with your friends and prove who is the master of En
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Structure the UI, such as current letters, who's turn it is, the menu, and the leaderboard.
+- **HTML** - Structure the UI, such as current letters, whose turn it is, the menu, and the leaderboard.
 - **CSS** - Make the game look visually appealing
 - **React** - Changes between screens and changes between player turns
-- **Service** - DataMuse https://www.datamuse.com/api/ This will be used for getting a list of all real words to check when a player counters a bluff.
+- **Service** - DataMuse https://www.datamuse.com/api/ This will be used to check if the current letters spell a word, or to check if a word is real when you counter a bluff by typing a word starting with the current letters.
 - **DB/Login** - Stores a leaderboard of the longest words ever spelled in the game. If you create a word over ten letters it will prompt you to put your name next to it on the leaderboard.
-- **WebSocket** - You will instantaneously see the other players letter choice and bluff calls.
+- **WebSocket** - You will instantaneously see the other player's letter choice and bluff calls.
 
 ## 🚀 Specification Deliverable
 
