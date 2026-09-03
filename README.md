@@ -6,7 +6,7 @@ Do you want to battle it out with your friends and prove who is the master of En
 
 ### Design
 
-![Design image](startupdiagrams.jpg)
+![Design image](Startupdiagrams.jpg)
 
 
 ### Key features
