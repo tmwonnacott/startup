@@ -45,8 +45,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [X] **Rented EC2 server** - I did not complete this part of the deliverable.
-- [X] **Leased domain name** - I did not complete this part of the deliverable.
+- [X] **Rented EC2 server** - Did a t3 nano
+- [X] **Leased domain name** - I bought the domain neverword.click
 - [X] **Server accessible** from my domain: (https://neverword.click) - Let's go!
 
 ## 🚀 HTML deliverable
