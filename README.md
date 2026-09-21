@@ -53,16 +53,16 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [X] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
+- [X] **HTML pages** - I added index, start, bluffcalled, winner, loser, leaderboard, and rules html pages
+- [X] **Proper HTML element usage** - I used headers, footers, main, and all that jazz
+- [X] **Links** - You are able to navigate between the pages
+- [X] **Text** - Yes there is text to explain everything
+- [X] **3rd party API placeholder** - The only "placeholder" I have is I will have java search through an api to see if an input is ina dictionary
+- [X] **Images** - I have a big red button
+- [X] **Login placeholder** - I have an option to put a username if you want to submit your name to the leaderboard
+- [X] **DB data placeholder** - I have a leaderboard with placeholder data
+- [X] **WebSocket placeholder** - It will show you what your opponent entered
 
 ## 🚀 CSS deliverable
 
