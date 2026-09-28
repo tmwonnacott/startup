@@ -4,14 +4,19 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>NeverWord</title> <!--Browser Tab Title-->
+	<link rel="stylesheet" href="./loser.css">
 </head>
-<body>
-    <h1>YOU LOSE!</h1>
-    <h3>You spelled the word: [WORD PLACEHOLDER]</h3>
-    <!--OR-->
-    <h3>You admitted to bluffing!</h3>
-    <!--OR-->
-    <h3>Your opponent wasn't bluffing, the word was [WORD PLACEHOLDER]</h3>
+<body class="loss-page">
+    <header class="loss-header">
+        <p class="loss-eyebrow">ROUND OVER</p>
+        <h1>YOU LOSE!</h1>
+    </header>
+    <main>
+        <h2>LOSER</h2>
+        <p>[PLACEHOLDER OF WHY YOU LOST]</p>
+        <a class="loss-button" href="./start.html">Play Again With Same Players</a>
+        <a class="loss-button" href="./index.html">Back to Menu</a>
+    </main>
 
     <footer>
         <p>NeverWord © 2026</p>
