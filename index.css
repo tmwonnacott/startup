@@ -59,6 +59,7 @@ main {
     border: 1px solid rgb(0, 3, 3) !important;
     border-radius: 60px;
     background: linear-gradient(0deg, rgb(34, 46, 116), rgb(97, 150, 172));
+    color: white;
     font-size: 20px;
 }
 
