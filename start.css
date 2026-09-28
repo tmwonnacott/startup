@@ -1,0 +1,70 @@
+.game-screen {
+	justify-content: flex-start;
+	padding: 12px 24px;
+}
+
+.game-screen h2 {
+	margin: 0 0 4px;
+}
+
+.game-screen .current-letters {
+	margin: 0 0 8px;
+	font-size: 4rem;
+	font-weight: 800;
+	line-height: 1.1;
+	overflow-wrap: anywhere;
+}
+
+.game-screen h3 {
+	margin: 6px 0;
+	font-size: 1.25rem;
+}
+
+.game-screen .letter-input {
+	align-self: center;
+	width: 56px;
+	height: 56px;
+	margin: 4px 0;
+	padding: 4px;
+	font-size: 2rem;
+	font-weight: 700;
+	text-align: center;
+    text-transform: capitalize;
+}
+
+.game-screen .btn-primary {
+	margin: 8px;
+}
+
+.game-screen .submit-letter {
+	align-self: center;
+	min-width: 0;
+	min-height: 44px;
+	padding: 6px 20px;
+	font-size: 24px;
+}
+
+.game-screen > a {
+	align-self: center;
+	line-height: 0;
+}
+
+.game-screen > a img {
+	display: block;
+}
+
+.call-bluff {
+	margin: 8px 0 4px;
+	color: #222;
+	font-weight: 1600;
+	-webkit-text-stroke: 1px #c62828;
+}
+
+.game-footer {
+	margin-top: 0;
+	padding: 6px 20px;
+}
+
+.game-footer .btn-primary {
+	margin: 4px;
+}
