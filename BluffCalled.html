@@ -4,13 +4,17 @@
 	    <meta charset="UTF-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <title>NeverWord</title> <!--Browser Tab Title-->
+        <link rel="stylesheet" href="./BluffCalled.css">
     </head>
 <body>
+    <header class="bluff-called-header">
+        <h1>PLAYER [] CALLED BLUFF</h1>
+    </header>
     <main>
-    <h1>
+    <h2>
         Type a word that starts with [CURRENT LETTERS PLACEHOLDER] or admit to bluffing.
-    </h1>
-    <input type="text" placeholder="Enter word">
+    </h2>
+    <input id="word-input" type="text" placeholder="Enter word">
 
     <!--JAVA NEEDED TO CHECK IF WORD IS IN DICTIONARY-->
     <a href="./winner.html">
@@ -28,6 +32,13 @@
     <footer>
         <p>NeverWord © 2026</p>
 	</footer>
+    <script>
+        const wordInput = document.querySelector("#word-input");
+
+        wordInput.addEventListener("input", () => {
+            wordInput.value = wordInput.value.replace(/[^a-z]/gi, "").toUpperCase();
+        });
+    </script>
 </body>
 
 

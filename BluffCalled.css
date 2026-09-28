@@ -1,0 +1,123 @@
+:root {
+	--page-blue: #285786;
+	--page-blue-light: #3a5964;
+	--page-green: #6d9652;
+	--page-text: #222;
+}
+
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+	margin: 0;
+	background: linear-gradient(to bottom, #4b5a41 0%, #fff 40%, #fff 60%, var(--page-green) 100%);
+	background-attachment: fixed;
+	color: var(--page-text);
+	font-family: Arial, sans-serif;
+	text-align: center;
+}
+
+.bluff-called-header {
+	padding: 30px;
+	background: linear-gradient(to bottom, var(--page-blue) 0%, var(--page-blue-light) 100%);
+	color: white;
+}
+
+.bluff-called-header h1 {
+	margin: 0;
+	color: white;
+	font-size: 56px;
+	font-weight: 800;
+	text-shadow: 3px 3px 0 #1d3f63, 0 0 16px rgba(255, 255, 255, 0.35);
+	text-transform: uppercase;
+}
+
+main {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1.25rem;
+	padding: 2rem;
+}
+
+main h2 {
+	max-width: 850px;
+	margin: 0 0 0.5rem;
+	color: var(--page-blue);
+	font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+main input[type="text"] {
+	box-sizing: border-box;
+	width: min(100%, 420px);
+	min-height: 64px;
+	padding: 0.75rem 1rem;
+	border: 2px solid var(--page-blue);
+	border-radius: 12px;
+	font: inherit;
+	font-size: 1.25rem;
+	text-align: center;
+}
+
+main a {
+	text-decoration: none;
+}
+
+main button {
+	min-width: 200px;
+	min-height: 64px;
+	margin: 0.25rem;
+	padding: 1rem 2rem;
+	border: 1px solid #000303;
+	border-radius: 60px;
+	background: linear-gradient(0deg, rgb(34, 46, 116), rgb(97, 150, 172));
+	color: white;
+	font: inherit;
+	font-size: 1.125rem;
+	cursor: pointer;
+}
+
+main button:hover {
+	background: linear-gradient(0deg, rgb(33, 43, 107), rgb(73, 111, 128));
+}
+
+main button:focus-visible,
+main input:focus-visible {
+	outline: 3px solid var(--page-blue);
+	outline-offset: 3px;
+}
+
+main a:last-of-type button {
+	background: linear-gradient(0deg, #8c2525, #d45555);
+}
+
+main a:last-of-type button:hover {
+	background: linear-gradient(0deg, #761e1e, #bd4545);
+}
+
+footer {
+	margin-top: 50px;
+	padding: 20px;
+	background: linear-gradient(to top, var(--page-blue) 0%, var(--page-blue-light) 100%);
+	color: white;
+}
+
+footer p {
+	margin: 5px;
+}
+
+@media (max-width: 600px) {
+	.bluff-called-header h1 {
+		font-size: 36px;
+	}
+
+	main {
+		padding: 1.25rem;
+	}
+
+	main button {
+		width: min(100%, 280px);
+	}
+}
