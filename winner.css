@@ -1,0 +1,156 @@
+:root {
+	--win-green: #2d6739;
+	--win-green-light: #57935d;
+	--win-text: #222;
+}
+
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+	margin: 0;
+	background: linear-gradient(to bottom, #3d6944 0%, #fff 40%, #fff 60%, #91b991 100%);
+	background-attachment: fixed;
+	color: var(--win-text);
+	font-family: Arial, sans-serif;
+	text-align: center;
+}
+
+.win-header {
+	padding: 30px;
+	background: linear-gradient(to bottom, #20582d 0%, var(--win-green-light) 100%);
+	color: white;
+}
+
+.win-eyebrow {
+	margin: 0 0 0.5rem;
+	font-size: 0.9rem;
+	font-weight: 700;
+	letter-spacing: 3px;
+}
+
+.win-header h1 {
+	margin: 0;
+	color: white;
+	font-size: 56px;
+	font-weight: 800;
+	text-shadow: 3px 3px 0 #194b25, 0 0 16px rgba(255, 255, 255, 0.3);
+}
+
+main {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	padding: 2rem;
+}
+
+main h2 {
+	margin: 0;
+	color: var(--win-green);
+	font-size: 2.5rem;
+}
+
+.win-actions,
+.win-leaderboard {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+.win-actions {
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.win-button {
+	display: inline-flex;
+	min-width: 200px;
+	min-height: 64px;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	padding: 1rem 2rem;
+	border: 1px solid #194b25;
+	border-radius: 60px;
+	background: linear-gradient(0deg, #20582d, #57935d);
+	color: white;
+	font-size: 1.125rem;
+	text-decoration: none;
+}
+
+.win-button:hover {
+	background: linear-gradient(0deg, #194b25, #477c4d);
+}
+
+.win-button--secondary {
+	background: linear-gradient(0deg, #222e74, #6196ac);
+	border-color: #000303;
+}
+
+.win-button--secondary:hover {
+	background: linear-gradient(0deg, #212b6b, #496f80);
+}
+
+.win-button:focus-visible,
+.win-leaderboard input:focus-visible {
+	outline: 3px solid var(--win-green);
+	outline-offset: 3px;
+}
+
+.win-leaderboard {
+	width: min(100%, 400px);
+	margin-top: 0.75rem;
+}
+
+.win-leaderboard h3 {
+	margin: 0 0 0.25rem;
+}
+
+.win-leaderboard input {
+	box-sizing: border-box;
+	width: 100%;
+	min-height: 52px;
+	padding: 0.75rem 1rem;
+	border: 2px solid var(--win-green);
+	border-radius: 12px;
+	font: inherit;
+	text-align: center;
+}
+
+footer {
+	margin-top: 50px;
+	padding: 20px;
+	background: linear-gradient(to top, #20582d 0%, var(--win-green-light) 100%);
+	color: white;
+}
+
+footer p {
+	margin: 5px;
+}
+
+@media (max-width: 600px) {
+	.win-header h1 {
+		font-size: 40px;
+	}
+
+	main {
+		padding: 1.25rem;
+	}
+
+	.win-actions {
+		flex-direction: column;
+	}
+
+	main h2 {
+		font-size: 1.75rem;
+	}
+
+	.win-button {
+		width: min(100%, 300px);
+	}
+}

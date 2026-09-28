@@ -4,23 +4,27 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>NeverWord</title> <!--Browser Tab Title-->
+	<link rel="stylesheet" href="./winner.css">
 </head>
 <body>
-    <h1>YOU WIN!</h1>
+	<header class="win-header">
+		<p class="win-eyebrow">ROUND OVER</p>
+		<h1>YOU WIN!</h1>
+	</header>
+	<main>
+		<h2>Well played!</h2>
+		<nav class="win-actions" aria-label="Game options">
+			<a class="win-button" href="./start.html">Play Again With Same Players</a>
+			<a class="win-button win-button--secondary" href="./index.html">Main Menu</a>
+		</nav>
+		<section class="win-leaderboard" aria-labelledby="leaderboard-title">
+			<h3 id="leaderboard-title">Submit to the leaderboard</h3>
+			<input type="text" aria-label="Username" placeholder="Enter Username">
+			<input type="password" aria-label="Password" placeholder="Enter Password">
+			<a class="win-button win-button--secondary" href="./leaderboard.html">Submit to Leaderboard</a>
+		</section>
+	</main>
 
-    <a href="./start.html">
-		<button type="button">Play Again With Same Players</button>
-	</a>
-        <a href="./index.html">
-		<button type="button">Main Menu</button>
-	</a>
-    
-    <input type="text" placeholder="Enter Username and Submit to Leaderboard">
-    <input type="password" placeholder="Enter Password">
-	<a href="./leaderboard.html">
-		<button type="button">Submit to Leaderboard</button>
-	</a>
-    
     <footer>
         <p>NeverWord © 2026</p>
 	</footer>
