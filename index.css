@@ -29,29 +29,51 @@ header h3 {
 main {
     padding: 40px;
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 /* Buttons */
 .btn-primary {
-    padding: 10px 20px;
-    margin: 10px;
+    min-width: 200px;
+    min-height: 64px;
+    padding: 18px 36px;
+    margin: 20px;
     border: 1px solid rgb(0, 3, 3) !important;
     border-radius: 60px;
     background: linear-gradient(0deg, rgb(34, 46, 116), rgb(97, 150, 172));
+    font-size: 20px;
 }
 
 .btn-primary:hover {
     background: linear-gradient(0deg, rgb(33, 43, 107),rgb(73, 111, 128));
 }
 
-/* Text input */
-input {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+
+.join-game {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
 }
 
+@media (max-width: 600px) {
+    .join-game {
+        flex-direction: column;
+    }
+}
+
+#game-code {
+    width: 240px;
+    height: 76px;
+    padding: 10px 16px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 36px;
+    letter-spacing: 12px;
+    text-transform: uppercase;
+}
 
 /* Footer */
 footer {
@@ -66,10 +88,6 @@ footer a {
     text-decoration: none;
 }
 
-footer nav a::before,
-footer nav a::after {
-    content: none !important;
-}
 
 footer p {
     margin: 5px;
