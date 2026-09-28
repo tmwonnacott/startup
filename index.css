@@ -5,19 +5,26 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
     margin: 0;
-    background-color: #f5f5f5;
+    background: linear-gradient(to bottom, #4b5a41 0%, #fff 40%, #fff 60%, #6d9652 100%);
+    background-attachment: fixed;
     color: #222;
 }
 
 /* Header */
 header {
-    background-color: #285786;
+    background: linear-gradient(to bottom, #285786 0%, #3a5964 100%);
     color: white;
     padding: 30px;
 }
 
 header h1 {
-    font-size: 48px;
+    font-size: 56px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-shadow: 3px 3px 0 #1d3f63, 0 0 16px rgba(255, 255, 255, 0.35);
+    margin-top: 0;
     margin-bottom: 10px;
 }
 
@@ -79,7 +86,7 @@ main {
 footer {
     margin-top: 50px;
     padding: 20px;
-    background-color: #285786;
+    background: linear-gradient(to top, #285786 0%, #3a5964 100%);
     color: white;
 }
 
