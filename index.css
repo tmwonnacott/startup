@@ -1,5 +1,7 @@
-/* Overall page */
 body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     font-family: Arial, sans-serif;
     text-align: center;
     margin: 0;
@@ -9,7 +11,7 @@ body {
 
 /* Header */
 header {
-    background-color: #343a40;
+    background-color: #285786;
     color: white;
     padding: 30px;
 }
@@ -26,22 +28,20 @@ header h3 {
 /* Main section */
 main {
     padding: 40px;
+    flex: 1;
 }
 
 /* Buttons */
-button {
+.btn-primary {
     padding: 10px 20px;
     margin: 10px;
-    border: none;
-    border-radius: 6px;
-    background-color: #007bff;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
+    border: 1px solid rgb(0, 3, 3) !important;
+    border-radius: 60px;
+    background: linear-gradient(0deg, rgb(34, 46, 116), rgb(97, 150, 172));
 }
 
-button:hover {
-    background-color: #0056b3;
+.btn-primary:hover {
+    background: linear-gradient(0deg, rgb(33, 43, 107),rgb(73, 111, 128));
 }
 
 /* Text input */
@@ -52,28 +52,33 @@ input {
     border-radius: 6px;
 }
 
-/* Links */
-a {
-    color: #007bff;
-}
-
-header a {
-    color: white;
-}
 
 /* Footer */
 footer {
     margin-top: 50px;
     padding: 20px;
-    background-color: #343a40;
+    background-color: #285786;
     color: white;
 }
 
 footer a {
     color: white;
-    margin: 10px;
+    text-decoration: none;
+}
+
+footer nav a::before,
+footer nav a::after {
+    content: none !important;
 }
 
 footer p {
     margin: 5px;
+}
+
+#Github {
+    text-decoration: underline;
+}
+
+footer nav a {
+    text-decoration: none !important;
 }
