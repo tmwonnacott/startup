@@ -1,0 +1,151 @@
+:root {
+	--leader-green: #285b3a;
+	--leader-green-light: #e8f0e6;
+	--leader-blue: #285786;
+	--leader-blue-light: #3a5964;
+	--leader-text: #26312b;
+}
+
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+	margin: 0;
+	background: linear-gradient(to bottom, #f0f5ed, #fff 55%, var(--leader-green-light));
+	color: var(--leader-text);
+	font-family: Arial, sans-serif;
+}
+
+.leaderboard-page {
+	box-sizing: border-box;
+	width: min(100%, 1040px);
+	flex: 1;
+	margin: 0 auto;
+	padding: 2.5rem 1.25rem;
+}
+
+.leaderboard-page h1 {
+	margin: 0 0 1.5rem;
+	color: var(--leader-green);
+	font-size: 2.5rem;
+	text-align: center;
+}
+
+.table-scroll {
+	overflow-x: auto;
+	border: 1px solid #cbd8ca;
+	border-radius: 8px;
+	background: white;
+	box-shadow: 0 10px 28px rgba(30, 58, 39, 0.12);
+}
+
+.table-scroll:focus-visible {
+	outline: 3px solid var(--leader-green);
+	outline-offset: 3px;
+}
+
+table {
+	width: 100%;
+	min-width: 620px;
+	border-collapse: collapse;
+	text-align: left;
+}
+
+caption {
+	padding: 1rem 1.25rem;
+	color: var(--leader-green);
+	font-size: 1.1rem;
+	font-weight: 700;
+	text-align: left;
+}
+
+thead {
+	background: var(--leader-green);
+	color: white;
+}
+
+th,
+td {
+	padding: 0.9rem 1.25rem;
+}
+
+th {
+	font-size: 0.9rem;
+	font-weight: 700;
+}
+
+tbody tr {
+	border-top: 1px solid #e1e8e0;
+}
+
+tbody tr:nth-child(even) {
+	background: #f3f7f2;
+}
+
+tbody tr:hover {
+	background: #e5efe2;
+}
+
+td:last-child {
+	color: var(--leader-green);
+	font-weight: 700;
+	text-align: right;
+font-variant-numeric: tabular-nums;
+}
+
+th:last-child {
+	text-align: right;
+}
+
+.leaderboard-footer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.75rem;
+	padding: 1.25rem;
+	background: linear-gradient(to top, var(--leader-blue) 0%, var(--leader-blue-light) 100%);
+	color: white;
+	text-align: center;
+}
+
+.menu-button {
+	display: inline-flex;
+	min-height: 48px;
+	align-items: center;
+	justify-content: center;
+	padding: 0.65rem 1.25rem;
+	border: 1px solid #111f2a;
+	border-radius: 999px;
+	background: linear-gradient(0deg, #222e74, #6196ac);
+	color: white;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.menu-button:hover {
+	background: linear-gradient(0deg, #212b6b, #496f80);
+}
+
+.menu-button:focus-visible {
+	outline: 3px solid white;
+	outline-offset: 3px;
+}
+
+.leaderboard-footer p {
+	margin: 0;
+}
+
+@media (max-width: 600px) {
+	.leaderboard-page {
+		padding: 1.75rem 1rem;
+	}
+
+	.leaderboard-page h1 {
+		font-size: 2rem;
+	}
+
+	th,
+	td {
+		padding: 0.75rem 1rem;
+	}
+}
