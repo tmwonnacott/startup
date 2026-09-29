@@ -46,6 +46,10 @@ main {
     justify-content: center;
 }
 
+.rules-main p {
+    font-size: 150%;
+}
+
 .home-main > .btn-primary {
     align-self: center;
 }
