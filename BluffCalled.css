@@ -3,6 +3,10 @@
 	--page-blue-light: #3a5964;
 	--page-green: #6d9652;
 	--page-text: #222;
+	--button-blue-dark: rgb(34, 46, 116);
+	--button-blue-light: rgb(97, 150, 172);
+	--button-blue-dark-hover: rgb(33, 43, 107);
+	--button-blue-light-hover: rgb(73, 111, 128);
 }
 
 body {
@@ -72,7 +76,7 @@ main button {
 	padding: 1rem 2rem;
 	border: 1px solid #000303;
 	border-radius: 60px;
-	background: linear-gradient(0deg, rgb(34, 46, 116), rgb(97, 150, 172));
+	background: linear-gradient(0deg, var(--button-blue-dark), var(--button-blue-light));
 	color: white;
 	font: inherit;
 	font-size: 1.125rem;
@@ -80,7 +84,7 @@ main button {
 }
 
 main button:hover {
-	background: linear-gradient(0deg, rgb(33, 43, 107), rgb(73, 111, 128));
+	background: linear-gradient(0deg, var(--button-blue-dark-hover), var(--button-blue-light-hover));
 }
 
 main button:focus-visible,

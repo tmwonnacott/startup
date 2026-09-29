@@ -94,6 +94,7 @@ main {
 }
 
 #game-code {
+	max-width: 100%;
     width: 240px;
     height: 76px;
     padding: 10px 16px;
