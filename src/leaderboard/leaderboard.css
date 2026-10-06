@@ -18,9 +18,9 @@
 
 .leaderboard-app .leaderboard-page {
 	box-sizing: border-box;
-	width: min(100%, 1040px);
+	width: 100%;
 	flex: 1;
-	margin: 0 auto;
+	margin: 0;
 	padding: 2.5rem 1.25rem;
 }
 
@@ -84,6 +84,30 @@
 
 .leaderboard-page tbody tr:hover {
 	background: #e5efe2;
+}
+
+.leaderboard-page tbody tr:nth-child(1) {
+	background: #fff3c4;
+}
+
+.leaderboard-page tbody tr:nth-child(1):hover {
+	background: #ffebad;
+}
+
+.leaderboard-page tbody tr:nth-child(2) {
+	background: #edf0f2;
+}
+
+.leaderboard-page tbody tr:nth-child(2):hover {
+	background: #e1e6e9;
+}
+
+.leaderboard-page tbody tr:nth-child(3) {
+	background: #f5e1d1;
+}
+
+.leaderboard-page tbody tr:nth-child(3):hover {
+	background: #edd2bc;
 }
 
 .leaderboard-page tbody tr:last-child {
