@@ -57,6 +57,20 @@
     font-size: 150%;
 }
 
+.rules-main .rules-example {
+    align-self: stretch;
+    font-size: 1.1rem;
+    text-align: left;
+}
+
+.rules-main .rules-example p {
+    font-size: inherit;
+}
+
+.rules-main .rules-important {
+    color: #c62828;
+}
+
 .home-main > .btn-primary {
     align-self: center;
 }
