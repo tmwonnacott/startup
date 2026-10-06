@@ -86,28 +86,35 @@
 	background: #e5efe2;
 }
 
-.leaderboard-page tbody tr:nth-child(1) {
-	background: #fff3c4;
+.leaderboard-rank-cell {
+	position: relative;
+	padding-left: 5rem !important;
 }
 
-.leaderboard-page tbody tr:nth-child(1):hover {
-	background: #ffebad;
+.leaderboard-rank {
+	position: absolute;
+	top: 50%;
+	left: 1.25rem;
+	transform: translateY(-50%);
+	font-family: Bungee, sans-serif;
+	font-size: 3rem;
+	line-height: 1;
+	pointer-events: none;
 }
 
-.leaderboard-page tbody tr:nth-child(2) {
-	background: #edf0f2;
+.leaderboard-rank-1 .leaderboard-rank {
+	color: #c89b22;
+	opacity: 0.3;
 }
 
-.leaderboard-page tbody tr:nth-child(2):hover {
-	background: #e1e6e9;
+.leaderboard-rank-2 .leaderboard-rank {
+	color: #78838c;
+	opacity: 0.3;
 }
 
-.leaderboard-page tbody tr:nth-child(3) {
-	background: #f5e1d1;
-}
-
-.leaderboard-page tbody tr:nth-child(3):hover {
-	background: #edd2bc;
+.leaderboard-rank-3 .leaderboard-rank {
+	color: #a9683f;
+	opacity: 0.3;
 }
 
 .leaderboard-page tbody tr:last-child {

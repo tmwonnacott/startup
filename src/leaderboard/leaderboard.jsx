@@ -42,8 +42,15 @@ export function Leaderboard() {
               </tr>
             </thead>
             <tbody>
-              {entries.map(([username, playedWord, length]) => (
-                <tr key={username}><td>{username}</td><td>{playedWord}</td><td>{length}</td></tr>
+              {entries.map(([username, playedWord, length], index) => (
+                <tr key={username}>
+                  <td className={index < 3 ? `leaderboard-rank-cell leaderboard-rank-${index + 1}` : undefined}>
+                    {index < 3 && <span className="leaderboard-rank" aria-hidden="true">{index + 1}</span>}
+                    <span>{username}</span>
+                  </td>
+                  <td>{playedWord}</td>
+                  <td>{length}</td>
+                </tr>
               ))}
             </tbody>
           </table>
