@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
 
-body {
+.standard-page {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -13,13 +13,13 @@ body {
 }
 
 /* Header */
-header {
+.standard-page > header {
     background: linear-gradient(to bottom, #285786 0%, #3a5964 100%);
     color: white;
     padding: 30px;
 }
 
-header h1 {
+.standard-page > header h1 {
 	font-family: 'Bungee', sans-serif;
     font-size: 56px;
     font-weight: 400;
@@ -31,7 +31,7 @@ header h1 {
     margin-bottom: 10px;
 }
 
-header h3 {
+.standard-page > header h3 {
     font-weight: normal;
 }
 
@@ -41,7 +41,7 @@ header h3 {
 }
 
 /* Main section */
-main {
+.standard-page > main {
     padding: 40px;
     flex: 1;
     display: flex;
@@ -58,7 +58,7 @@ main {
 }
 
 /* Buttons */
-.btn-primary {
+.standard-page .btn-primary {
     min-width: 200px;
     min-height: 64px;
     padding: 18px 36px;
@@ -70,7 +70,7 @@ main {
     font-size: 20px;
 }
 
-.btn-primary:hover {
+.standard-page .btn-primary:hover {
     background: linear-gradient(0deg, rgb(33, 43, 107),rgb(73, 111, 128));
 }
 
@@ -83,7 +83,7 @@ main {
 }
 
 @media (max-width: 600px) {
-    header h1 {
+    .standard-page > header h1 {
         font-size: 36px;
         letter-spacing: 1px;
     }
@@ -106,38 +106,38 @@ main {
 }
 
 /* Footer */
-footer {
+.standard-page > footer {
     margin-top: 50px;
     padding: 20px;
     background: linear-gradient(to top, #285786 0%, #3a5964 100%);
     color: white;
 }
 
-footer a {
+.standard-page > footer a {
     color: white;
     text-decoration: none;
 }
 
-footer nav {
+.standard-page > footer nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 24px;
 }
 
-footer nav .btn-primary {
+.standard-page > footer nav .btn-primary {
     margin: 0;
 }
 
 
-footer p {
+.standard-page > footer p {
     margin: 5px;
 }
 
-#Github {
+.standard-page #Github {
     text-decoration: underline;
 }
 
-footer nav a {
+.standard-page > footer nav a {
     text-decoration: none !important;
 }

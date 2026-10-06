@@ -4,7 +4,7 @@
 	--loss-text: #222;
 }
 
-body {
+.loss-page {
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
@@ -37,7 +37,7 @@ body {
 	text-shadow: 3px 3px 0 #572023, 0 0 16px rgba(255, 255, 255, 0.3);
 }
 
-main {
+.loss-page main {
 	display: flex;
 	flex: 1;
 	flex-direction: column;
@@ -47,13 +47,13 @@ main {
 	padding: 2rem;
 }
 
-main h2 {
+.loss-page main h2 {
 	margin: 0;
 	color: var(--loss-red);
 	font-size: clamp(1.75rem, 4vw, 2.5rem);
 }
 
-main p {
+.loss-page main p {
 	margin: 0;
 	font-size: 1.2rem;
 }
@@ -84,14 +84,14 @@ main p {
 	outline-offset: 3px;
 }
 
-footer {
+.loss-page > footer {
 	margin-top: 50px;
 	padding: 20px;
 	background: linear-gradient(to top, #742326 0%, var(--loss-red-light) 100%);
 	color: white;
 }
 
-footer p {
+.loss-page > footer p {
 	margin: 5px;
 }
 
@@ -100,11 +100,11 @@ footer p {
 		font-size: 40px;
 	}
 
-	main {
+	.loss-page main {
 		padding: 1.25rem;
 	}
 
-	main h2 {
+	.loss-page main h2 {
 		font-size: 1.75rem;
 	}
 }

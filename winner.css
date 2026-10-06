@@ -4,7 +4,7 @@
 	--win-text: #222;
 }
 
-body {
+.winner-page {
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
@@ -37,7 +37,7 @@ body {
 	text-shadow: 3px 3px 0 #194b25, 0 0 16px rgba(255, 255, 255, 0.3);
 }
 
-main {
+.winner-page main {
 	display: flex;
 	flex: 1;
 	flex-direction: column;
@@ -47,7 +47,7 @@ main {
 	padding: 2rem;
 }
 
-main h2 {
+.winner-page main h2 {
 	margin: 0;
 	color: var(--win-green);
 	font-size: 2.5rem;
@@ -122,14 +122,14 @@ main h2 {
 	text-align: center;
 }
 
-footer {
+.winner-page > footer {
 	margin-top: 50px;
 	padding: 20px;
 	background: linear-gradient(to top, #20582d 0%, var(--win-green-light) 100%);
 	color: white;
 }
 
-footer p {
+.winner-page > footer p {
 	margin: 5px;
 }
 
@@ -138,7 +138,7 @@ footer p {
 		font-size: 40px;
 	}
 
-	main {
+	.winner-page main {
 		padding: 1.25rem;
 	}
 
@@ -146,7 +146,7 @@ footer p {
 		flex-direction: column;
 	}
 
-	main h2 {
+	.winner-page main h2 {
 		font-size: 1.75rem;
 	}
 

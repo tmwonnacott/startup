@@ -1,52 +1,17 @@
-<!-- Use this code to update on the server  scp -i C:\byu\cs260\AWSKey\Joe.pem C:\byu\cs260\startup\index.html ubuntu@98.83.181.145:/usr/share/caddy//
-index.html-->
 <!DOCTYPE html>
+<!-- Build and deploy the Vite bundle with deployFiles.sh. -->
 <html lang="en">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>NeverWord</title> <!--Browser Tab Title-->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="index.css">
+	<meta name="theme-color" content="#285786">
+	<title>NeverWord</title>
 </head>
 
 <body>
-	
-	<header>
-		<h1>NeverWord</h1>
-		<h3>Trap your opponent with your vocabulary!</h3>
-
-	</header>
-
-	<main class="container text-center home-main">
-		<a href="waitingroom.html" class="btn btn-primary">Start Game</a>
-
-		<div class="join-game">
-			<a href="./start.html" class="btn btn-primary">Join Game</a>
-			<input
-				type="text"
-				id="game-code"
-				class="form-control"
-				maxlength="4"
-				placeholder="CODE"
-			>
-		</div>
-	</main>
-	
-	<footer>
-		<nav>
-		<!--Rules-->
-	
-		<!--LEADERBOARD-->
-		<a href="./leaderboard.html" class="btn btn-primary">Leaderboard</a>	
-		<a href="./rules.html" class="btn btn-primary">Rules</a>
-		</nav>
-		<p>Thomas Wonnacott</p>
-		<a  id="Github" href = "https://github.com/tmwonnacott/startup">GitHub Repo</a>
-    	<p>NeverWord © 2026</p>
-	</footer>
-
+	<div id="root"></div>
+	<script type="module" src="/src/main.jsx"></script>
 </body>
 
 </html>

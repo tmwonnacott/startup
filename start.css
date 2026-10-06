@@ -60,7 +60,7 @@
 	-webkit-text-stroke: 1px #c62828;
 }
 
-.game-footer {
+.standard-page > .game-footer {
 	margin-top: 0;
 	padding: 6px 20px;
 }

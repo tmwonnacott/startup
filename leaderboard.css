@@ -6,7 +6,7 @@
 	--leader-text: #26312b;
 }
 
-body {
+.leaderboard-app {
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
@@ -16,7 +16,7 @@ body {
 	font-family: Arial, sans-serif;
 }
 
-.leaderboard-page {
+.leaderboard-app .leaderboard-page {
 	box-sizing: border-box;
 	width: min(100%, 1040px);
 	flex: 1;
@@ -44,14 +44,14 @@ body {
 	outline-offset: 3px;
 }
 
-table {
+.leaderboard-page table {
 	width: 100%;
 	min-width: 620px;
 	border-collapse: collapse;
 	text-align: left;
 }
 
-caption {
+.leaderboard-page caption {
 	padding: 1rem 1.25rem;
 	color: var(--leader-green);
 	font-size: 1.1rem;
@@ -59,54 +59,54 @@ caption {
 	text-align: left;
 }
 
-thead {
+.leaderboard-page thead {
 	background: var(--leader-green);
 	color: white;
 }
 
-th,
-td {
+.leaderboard-page th,
+.leaderboard-page td {
 	padding: 0.9rem 1.25rem;
 }
 
-th {
+.leaderboard-page th {
 	font-size: 0.9rem;
 	font-weight: 700;
 }
 
-tbody tr {
+.leaderboard-page tbody tr {
 	border-top: 1px solid #e1e8e0;
 }
 
-tbody tr:nth-child(even) {
+.leaderboard-page tbody tr:nth-child(even) {
 	background: #f3f7f2;
 }
 
-tbody tr:hover {
+.leaderboard-page tbody tr:hover {
 	background: #e5efe2;
 }
 
-tbody tr:last-child {
+.leaderboard-page tbody tr:last-child {
 	border-top: 2px solid #3a6f9a;
 	background: #dceeff;
 }
 
-tbody tr:last-child:hover {
+.leaderboard-page tbody tr:last-child:hover {
 	background: #c9e4ff;
 }
 
-td:last-child {
+.leaderboard-page td:last-child {
 	color: var(--leader-green);
 	font-weight: 700;
 	text-align: right;
 font-variant-numeric: tabular-nums;
 }
 
-th:last-child {
+.leaderboard-page th:last-child {
 	text-align: right;
 }
 
-.leaderboard-footer {
+.leaderboard-app > .leaderboard-footer {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -140,12 +140,12 @@ th:last-child {
 	outline-offset: 3px;
 }
 
-.leaderboard-footer p {
+.leaderboard-app > .leaderboard-footer p {
 	margin: 0;
 }
 
 @media (max-width: 600px) {
-	.leaderboard-page {
+	.leaderboard-app .leaderboard-page {
 		padding: 1.75rem 1rem;
 	}
 
@@ -153,8 +153,8 @@ th:last-child {
 		font-size: 2rem;
 	}
 
-	th,
-	td {
+	.leaderboard-page th,
+	.leaderboard-page td {
 		padding: 0.75rem 1rem;
 	}
 }

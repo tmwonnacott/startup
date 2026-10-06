@@ -54,9 +54,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [X] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [X] **HTML pages** - I added index, start, bluffcalled, winner, loser, leaderboard, and rules html pages
+- [X] **HTML pages** - The home, game, rules, leaderboard, and round-result screens are rendered by the app.
 - [X] **Proper HTML element usage** - I used headers, footers, main, and all that jazz
-- [X] **Links** - You are able to navigate between the pages
+- [X] **Links** - React Router changes screens without reloading the page.
 - [X] **Text** - Yes there is text to explain everything
 - [X] **3rd party API placeholder** - The only "placeholder" I have is I will have java search through an api to see if an input is ina dictionary
 - [X] **Images** - I have a big red button
@@ -80,10 +80,10 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - I did not complete this part of the deliverable.
+- [X] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
+- [X] **Bundled using Vite** - Run `npm install`, then `npm run dev` during development. Use `npm run build` to create the deployable bundle.
+- [X] **Components** - Each game screen is rendered as a React component.
+- [X] **Router** - React Router switches between the game screens without reloading the page.
 
 ## 🚀 React part 2: Reactivity deliverable
 

@@ -9,7 +9,7 @@
 	--button-blue-light-hover: rgb(73, 111, 128);
 }
 
-body {
+.bluff-page {
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
@@ -36,7 +36,7 @@ body {
 	text-transform: uppercase;
 }
 
-main {
+.bluff-page main {
 	display: flex;
 	flex: 1;
 	flex-direction: column;
@@ -46,14 +46,14 @@ main {
 	padding: 2rem;
 }
 
-main h2 {
+.bluff-page main h2 {
 	max-width: 850px;
 	margin: 0 0 0.5rem;
 	color: var(--page-blue);
 	font-size: clamp(1.75rem, 4vw, 2.5rem);
 }
 
-main input[type="text"] {
+.bluff-page main input[type="text"] {
 	box-sizing: border-box;
 	width: min(100%, 420px);
 	min-height: 64px;
@@ -65,11 +65,11 @@ main input[type="text"] {
 	text-align: center;
 }
 
-main a {
+.bluff-page main a {
 	text-decoration: none;
 }
 
-main button {
+.bluff-page main a {
 	min-width: 200px;
 	min-height: 64px;
 	margin: 0.25rem;
@@ -83,32 +83,32 @@ main button {
 	cursor: pointer;
 }
 
-main button:hover {
+.bluff-page main a:hover {
 	background: linear-gradient(0deg, var(--button-blue-dark-hover), var(--button-blue-light-hover));
 }
 
-main button:focus-visible,
-main input:focus-visible {
+.bluff-page main a:focus-visible,
+.bluff-page main input:focus-visible {
 	outline: 3px solid var(--page-blue);
 	outline-offset: 3px;
 }
 
-main a:last-of-type button {
+.bluff-page main a:last-of-type {
 	background: linear-gradient(0deg, #8c2525, #d45555);
 }
 
-main a:last-of-type button:hover {
+.bluff-page main a:last-of-type:hover {
 	background: linear-gradient(0deg, #761e1e, #bd4545);
 }
 
-footer {
+.bluff-page > footer {
 	margin-top: 50px;
 	padding: 20px;
 	background: linear-gradient(to top, var(--page-blue) 0%, var(--page-blue-light) 100%);
 	color: white;
 }
 
-footer p {
+.bluff-page > footer p {
 	margin: 5px;
 }
 
@@ -117,11 +117,11 @@ footer p {
 		font-size: 36px;
 	}
 
-	main {
+	.bluff-page main {
 		padding: 1.25rem;
 	}
 
-	main button {
+	.bluff-page main a {
 		width: min(100%, 280px);
 	}
 }
