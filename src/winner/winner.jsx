@@ -5,12 +5,17 @@ import './winner.css';
 
 export function Winner() {
   return (
-    <PageFrame className="winner-page" footer={<p>NeverWord © 2026</p>}>
-      <main>
+    <PageFrame
+      className="winner-page"
+      header={
         <header className="win-header">
           <p className="win-eyebrow">ROUND OVER</p>
           <h1>YOU WIN!</h1>
         </header>
+      }
+      footer={<p>NeverWord © 2026</p>}
+    >
+      <main>
         <h2>Well played!</h2>
         <nav className="win-actions" aria-label="Game options">
           <Link className="win-button" to="/start">Play Again With Same Players</Link>

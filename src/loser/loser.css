@@ -16,7 +16,7 @@
 	text-align: center;
 }
 
-.loss-header {
+.loss-page > .loss-header {
 	padding: 30px;
 	background: linear-gradient(to bottom, #742326 0%, var(--loss-red-light) 100%);
 	color: white;
@@ -29,7 +29,7 @@
 	letter-spacing: 3px;
 }
 
-.loss-header h1 {
+.loss-page > .loss-header h1 {
 	margin: 0;
 	color: white;
 	font-size: 56px;
@@ -96,7 +96,7 @@
 }
 
 @media (max-width: 600px) {
-	.loss-header h1 {
+	.loss-page > .loss-header h1 {
 		font-size: 40px;
 	}
 
