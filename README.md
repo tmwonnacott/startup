@@ -81,7 +81,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [X] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [X] **Bundled using Vite** - Run `npm install`, then `npm run dev` during development. Use `npm run build` to create the deployable bundle.
+- [X] **Bundled using Vite** - Run `npm install`, then `npm run dev` during development. Use `npm run build` to create the deployable bundle; `deployReact.sh` builds and deploys it.
 - [X] **Components** - Each game screen is rendered as a React component.
 - [X] **Router** - React Router switches between the game screens without reloading the page.
 
