@@ -81,9 +81,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [X] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [X] **Bundled using Vite** - Run `npm install`, then `npm run dev` during development. Use `npm run build` to create the deployable bundle; `deployReact.sh` builds and deploys it.
-- [X] **Components** - Each game screen is rendered as a React component.
-- [X] **Router** - React Router switches between the game screens without reloading the page.
+- [X] **Bundled using Vite** - I did all the terminal stuff. Don't really remember how it worked
+- [X] **Components** - Everything is in a jsx file now so it can switch between components
+- [X] **Router** - It switches between screens without reloading
 
 ## 🚀 React part 2: Reactivity deliverable
 
