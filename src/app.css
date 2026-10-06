@@ -59,7 +59,13 @@
 
 .rules-main .rules-example {
     align-self: stretch;
+    box-sizing: border-box;
     font-size: 1.1rem;
+    margin: 1rem 0;
+    padding: 1rem 1.25rem;
+    border: 1px solid #d5e6f2;
+    border-radius: 8px;
+    background: #edf6fc;
     text-align: left;
 }
 
@@ -67,9 +73,7 @@
     font-size: inherit;
 }
 
-.rules-main .rules-important {
-    color: #c62828;
-}
+
 
 .home-main > .btn-primary {
     align-self: center;
