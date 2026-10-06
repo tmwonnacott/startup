@@ -6,7 +6,7 @@ export function PageFrame({ children, className = '', header, footer, footerClas
       {header ?? (
         <header>
           <h1>NeverWord</h1>
-          <h3>Trap your opponent with your vocabulary!</h3>
+          <h3>Don't Spell a Word!</h3>
         </header>
       )}
       {children}
