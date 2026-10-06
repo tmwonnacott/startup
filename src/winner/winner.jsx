@@ -1,15 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { PageFrame } from '../shared/pageFrame';
 import './winner.css';
 
 export function Winner() {
   return (
-    <div className="winner-page">
-      <header className="win-header">
-        <p className="win-eyebrow">ROUND OVER</p>
-        <h1>YOU WIN!</h1>
-      </header>
+    <PageFrame className="winner-page" footer={<p>NeverWord © 2026</p>}>
       <main>
+        <header className="win-header">
+          <p className="win-eyebrow">ROUND OVER</p>
+          <h1>YOU WIN!</h1>
+        </header>
         <h2>Well played!</h2>
         <nav className="win-actions" aria-label="Game options">
           <Link className="win-button" to="/start">Play Again With Same Players</Link>
@@ -22,7 +23,6 @@ export function Winner() {
           <Link className="win-button win-button--secondary" to="/leaderboard">Submit to Leaderboard</Link>
         </section>
       </main>
-      <footer><p>NeverWord © 2026</p></footer>
-    </div>
+    </PageFrame>
   );
 }

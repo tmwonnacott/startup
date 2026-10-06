@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { PageFrame } from '../shared/pageFrame';
 import './leaderboard.css';
 
 const entries = [
@@ -18,7 +19,16 @@ const entries = [
 
 export function Leaderboard() {
   return (
-    <div className="leaderboard-app">
+    <PageFrame
+      className="leaderboard-app"
+      footerClassName="leaderboard-footer"
+      footer={
+        <>
+          <Link className="menu-button" to="/">Back to Main Menu</Link>
+          <p>NeverWord © 2026</p>
+        </>
+      }
+    >
       <main className="leaderboard-page">
         <h1>Leaderboard</h1>
         <div className="table-scroll" role="region" aria-label="Leaderboard entries" tabIndex="0">
@@ -39,10 +49,6 @@ export function Leaderboard() {
           </table>
         </div>
       </main>
-      <footer className="leaderboard-footer">
-        <Link className="menu-button" to="/">Back to Main Menu</Link>
-        <p>NeverWord © 2026</p>
-      </footer>
-    </div>
+    </PageFrame>
   );
 }
