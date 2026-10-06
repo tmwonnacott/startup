@@ -21,4 +21,4 @@ Interesting things I have learned about HTML
 
 ## React
 
-Interesting things I have learned about React
+I learned that you can make it so html pages are seamlessly connected through the app.jsx page.
