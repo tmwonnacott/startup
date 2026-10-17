@@ -12,6 +12,7 @@ export function StartGame() {
     if (submittedLetter) {
       setCurrentLetters((letters) => [...letters, submittedLetter]);
     }
+    setLetter('');
   }
 
   return (
@@ -42,7 +43,11 @@ export function StartGame() {
           Submit Letter
         </button>
         <p className="call-bluff">CALL BLUFF!</p>
-        <Link to="/bluff-called" aria-label="Call bluff">
+        <Link
+          to="/bluff-called"
+          state={{ currentLetters: currentLetters.join('') || 'None' }}
+          aria-label="Call bluff"
+        >
           <img src="/BigRedButton.png" width="100" alt="Call bluff" />
         </Link>
       </main>

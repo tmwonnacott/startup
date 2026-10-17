@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './bluffcalled.css';
 
 export function BluffCalled() {
   const [word, setWord] = useState('');
+  const { state } = useLocation();
+  const currentLetters = state?.currentLetters ?? 'None';
 
   return (
     <div className="bluff-page">
@@ -11,7 +13,7 @@ export function BluffCalled() {
         <h1>PLAYER [] CALLED BLUFF</h1>
       </header>
       <main>
-        <h2>Type a word that starts with [CURRENT LETTERS PLACEHOLDER] or admit to bluffing.</h2>
+        <h2>Type a word that starts with {currentLetters} or admit to bluffing.</h2>
         <input
           id="word-input"
           type="text"
