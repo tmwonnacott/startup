@@ -5,10 +5,10 @@ import './start.css';
 
 export function StartGame() {
   const [letter, setLetter] = useState('');
-  const [currentLetters, setCurrentLetters] = useState('[LETTERS PLACEHOLDER]');
+  const [currentLetters, setCurrentLetters] = useState('None');
 
   function submitLetter() {
-    const submittedLetter = letter.trim();
+    const submittedLetter = letter.trim().toUpperCase();
     if (submittedLetter) {
       setCurrentLetters(submittedLetter);
     }
