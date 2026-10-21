@@ -1,9 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { PageFrame } from '../shared/pageFrame';
 import './winner.css';
 
 export function Winner() {
+  const { state } = useLocation();
+  const word = state?.word;
+
   return (
     <PageFrame
       className="winner-page"
@@ -21,6 +24,8 @@ export function Winner() {
           <Link className="win-button" to="/start">Play Again With Same Players</Link>
           <Link className="win-button win-button--secondary" to="/">Main Menu</Link>
         </nav>
+        <br></br>
+        {word && <h2>Your Word: {word}</h2>}
         <section className="win-leaderboard" aria-labelledby="leaderboard-title">
           <h3 id="leaderboard-title">Submit to the leaderboard</h3>
           <input type="text" aria-label="Username" placeholder="Enter Username" />

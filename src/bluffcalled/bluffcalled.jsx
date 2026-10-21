@@ -22,7 +22,7 @@ export function BluffCalled() {
           value={word}
           onChange={(event) => setWord(event.target.value.replace(/[^a-z]/gi, '').toUpperCase())}
         />
-        <Link to="/winner">Submit Word</Link>
+        <Link to="/winner" state={{ word }}>Submit Word</Link>
         <Link to="/loser">ADMIT TO BLUFF</Link>
       </main>
       <footer><p>NeverWord © 2026</p></footer>
