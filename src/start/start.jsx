@@ -9,9 +9,8 @@ export function StartGame() {
   const [currentPlayer, setCurrentPlayer] = useState(1);
 
   function submitLetter() {
-    const submittedLetter = letter.trim().toUpperCase();
-    if (submittedLetter) {
-      setCurrentLetters((letters) => [...letters, submittedLetter]);
+    if (/^[A-Z]$/.test(letter)) {
+      setCurrentLetters((letters) => [...letters, letter]);
       setCurrentPlayer((player) => (player === 1 ? 2 : 1));
     }
     setLetter('');
@@ -49,9 +48,14 @@ export function StartGame() {
           maxLength="1"
           aria-label="Choose a letter"
           value={letter}
-          onChange={(event) => setLetter(event.target.value)}
+          onChange={(event) => setLetter(event.target.value.toUpperCase().replace(/[^A-Z]/g, '').slice(0, 1))}
         />
-        <button type="button" className="btn btn-primary submit-letter" onClick={submitLetter}>
+        <button
+          type="button"
+          className="btn btn-primary submit-letter"
+          onClick={submitLetter}
+          disabled={!/^[A-Z]$/.test(letter)}
+        >
           Submit Letter
         </button>
         <p className="call-bluff">CALL BLUFF!</p>
