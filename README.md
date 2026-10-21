@@ -89,9 +89,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [X] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
+- [X] **All functionality implemented or mocked out** - A lot of mocking since the majority of the coding will have to do with APIs and online functionality but you can functionaly play the game locally against yourself or a local friend
+- [X] **Hooks** - I used reactstate and effect
 
 ## 🚀 Service deliverable
 
