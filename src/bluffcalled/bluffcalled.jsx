@@ -6,11 +6,12 @@ export function BluffCalled() {
   const [word, setWord] = useState('');
   const { state } = useLocation();
   const currentLetters = state?.currentLetters ?? 'None';
+  const currentPlayer = state?.currentPlayer;
 
   return (
     <div className="bluff-page">
       <header className="bluff-called-header">
-        <h1>PLAYER [] CALLED BLUFF</h1>
+        <h1>PLAYER{currentPlayer ? ` ${currentPlayer} ` : ' '}CALLED BLUFF</h1>
       </header>
       <main>
         <h2>Type a word that starts with {currentLetters} or admit to bluffing.</h2>

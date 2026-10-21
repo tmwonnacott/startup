@@ -61,7 +61,7 @@ export function StartGame() {
         <p className="call-bluff">CALL BLUFF!</p>
         <Link
           to="/bluff-called"
-          state={{ currentLetters: currentLetters.join('') || 'None' }}
+          state={{ currentLetters: currentLetters.join('') || 'None', currentPlayer }}
           aria-label="Call bluff"
         >
           <img src="/BigRedButton.png" width="100" alt="Call bluff" />
