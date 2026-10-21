@@ -29,7 +29,12 @@ export function StartGame() {
       }
     >
       <main className="container text-center game-screen">
-        <p className="current-player-turn">Player {currentPlayer}&apos;s Turn</p>
+        <p className="current-player-turn">
+          {currentPlayer === 1
+            ? 'Submit a letter Player 1'
+            : 'Waiting for Player 2 to Submit a Letter'}
+        </p>
+        <br></br>
         <h2>Current Letters</h2>
         <p className="current-letters">{currentLetters.join('') || '_'}</p>
         {currentLetters.length > 0 && (
@@ -38,7 +43,6 @@ export function StartGame() {
             {currentLetters[currentLetters.length - 1]}
           </h3>
         )}
-        <h3>Player {currentPlayer} Choose a Letter</h3>
         <input
           type="text"
           className="form-control letter-input"
