@@ -32,7 +32,12 @@ export function StartGame() {
         <p className="current-player-turn">Player {currentPlayer}&apos;s Turn</p>
         <h2>Current Letters</h2>
         <p className="current-letters">{currentLetters.join('') || '_'}</p>
-        <h3>Player 2 Chose the Letter: [PLAYER2 LETTER PLACEHOLDER]</h3>
+        {currentLetters.length > 0 && (
+          <h3>
+            Player {currentPlayer === 1 ? 2 : 1} Chose the Letter:{' '}
+            {currentLetters[currentLetters.length - 1]}
+          </h3>
+        )}
         <h3>Player {currentPlayer} Choose a Letter</h3>
         <input
           type="text"
