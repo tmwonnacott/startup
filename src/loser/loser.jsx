@@ -17,7 +17,7 @@ export function Loser() {
     >
       <main>
         <h2>LOSER</h2>
-        <p>[PLACEHOLDER OF WHY YOU LOST]</p>
+        <p>You were bluffing or you submitted a word that isn't a word or you spelled a word (need API for this functionality)</p>
         <Link className="loss-button" to="/start">Play Again With Same Players</Link>
         <Link className="loss-button" to="/">Back to Menu</Link>
       </main>
