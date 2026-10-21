@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { PageFrame } from '../shared/pageFrame';
 import { loadLeaderboardData } from './leaderboardStorage';
@@ -7,17 +7,29 @@ import './leaderboard.css';
 export function Leaderboard() {
   const { state } = useLocation();
   const showLatestScore = state?.showLatestScore === true;
-  const [storageState] = useState(() => {
-    try {
-      return { data: loadLeaderboardData(), error: '' };
-    } catch (error) {
-      return {
-        data: { entries: [], latestScore: null },
-        error: error instanceof Error ? error.message : 'Could not load the leaderboard.',
-      };
-    }
+  const [storageState, setStorageState] = useState({
+    data: null,
+    error: '',
+    loading: true,
   });
-  const { entries, latestScore } = storageState.data;
+
+  useEffect(() => {
+    try {
+      setStorageState({
+        data: loadLeaderboardData(),
+        error: '',
+        loading: false,
+      });
+    } catch (error) {
+      setStorageState({
+        data: null,
+        error: error instanceof Error ? error.message : 'Could not load the leaderboard.',
+        loading: false,
+      });
+    }
+  }, []);
+
+  const { entries = [], latestScore = null } = storageState.data ?? {};
 
   return (
     <PageFrame
@@ -64,7 +76,8 @@ export function Leaderboard() {
           </table>
         </div>
         {storageState.error && <p role="alert">{storageState.error}</p>}
-        {!storageState.error && entries.length === 0 && <p>No scores submitted yet.</p>}
+        {storageState.loading && <p>Loading leaderboard...</p>}
+        {!storageState.loading && !storageState.error && entries.length === 0 && <p>No scores submitted yet.</p>}
       </main>
     </PageFrame>
   );
