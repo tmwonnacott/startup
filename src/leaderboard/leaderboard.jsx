@@ -1,23 +1,24 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { PageFrame } from '../shared/pageFrame';
+import { loadLeaderboardData } from './leaderboardStorage';
 import './leaderboard.css';
 
-const entries = [
-  ['WordWizard', 'Floccinaucinihilipilification', 29],
-  ['LetterLegend', 'Antidisestablishmentarianism', 28],
-  ['LexiMaster', 'Psychoneuroendocrinological', 28],
-  ['SpellSprinter', 'Honorificabilitudinitatibus', 27],
-  ['VocabVoyager', 'Counterrevolutionaries', 22],
-  ['SyntaxSage', 'Uncharacteristically', 20],
-  ['WordSmithy', 'Misunderstanding', 16],
-  ['GlyphGazer', 'Extraordinary', 13],
-  ['PhrasePilot', 'Knowledgeable', 12],
-  ['RhymeRunner', 'Imagination', 11],
-  ['[your name]', '[your word]', '[number of letters]'],
-];
-
 export function Leaderboard() {
+  const { state } = useLocation();
+  const showLatestScore = state?.showLatestScore === true;
+  const [storageState] = useState(() => {
+    try {
+      return { data: loadLeaderboardData(), error: '' };
+    } catch (error) {
+      return {
+        data: { entries: [], latestScore: null },
+        error: error instanceof Error ? error.message : 'Could not load the leaderboard.',
+      };
+    }
+  });
+  const { entries, latestScore } = storageState.data;
+
   return (
     <PageFrame
       className="leaderboard-app"
@@ -42,19 +43,28 @@ export function Leaderboard() {
               </tr>
             </thead>
             <tbody>
-              {entries.map(([username, playedWord, length], index) => (
-                <tr key={username}>
+              {showLatestScore && latestScore && (
+                <tr className="current-game-score">
+                  <td>{latestScore.username} (This Game)</td>
+                  <td>{latestScore.word}</td>
+                  <td>{latestScore.length}</td>
+                </tr>
+              )}
+              {entries.map((entry, index) => (
+                <tr key={`${entry.username}-${entry.word}-${index}`}>
                   <td className={index < 3 ? `leaderboard-rank-cell leaderboard-rank-${index + 1}` : undefined}>
                     {index < 3 && <span className="leaderboard-rank" aria-hidden="true">{index + 1}</span>}
-                    <span>{username}</span>
+                    <span>{entry.username}</span>
                   </td>
-                  <td>{playedWord}</td>
-                  <td>{length}</td>
+                  <td>{entry.word}</td>
+                  <td>{entry.length}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+        {storageState.error && <p role="alert">{storageState.error}</p>}
+        {!storageState.error && entries.length === 0 && <p>No scores submitted yet.</p>}
       </main>
     </PageFrame>
   );

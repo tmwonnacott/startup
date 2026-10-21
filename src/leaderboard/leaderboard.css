@@ -117,12 +117,12 @@
 	opacity: 0.3;
 }
 
-.leaderboard-page tbody tr:last-child {
+.leaderboard-page tbody tr.current-game-score {
 	border-top: 2px solid #3a6f9a;
 	background: #dceeff;
 }
 
-.leaderboard-page tbody tr:last-child:hover {
+.leaderboard-page tbody tr.current-game-score:hover {
 	background: #c9e4ff;
 }
 

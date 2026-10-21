@@ -87,6 +87,11 @@
 	background: linear-gradient(0deg, #194b25, #477c4d);
 }
 
+.win-button:disabled {
+	cursor: not-allowed;
+	opacity: 0.55;
+}
+
 .win-button--secondary {
 	background: linear-gradient(0deg, #222e74, #6196ac);
 	border-color: #000303;
