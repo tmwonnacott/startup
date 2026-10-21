@@ -59,13 +59,19 @@ export function StartGame() {
           Submit Letter
         </button>
         <p className="call-bluff">CALL BLUFF!</p>
-        <Link
-          to="/bluff-called"
-          state={{ currentLetters: currentLetters.join('') || 'None', currentPlayer }}
-          aria-label="Call bluff"
-        >
-          <img src="/BigRedButton.png" width="100" alt="Call bluff" />
-        </Link>
+        {currentLetters.length >= 2 ? (
+          <Link
+            to="/bluff-called"
+            state={{ currentLetters: currentLetters.join(''), currentPlayer }}
+            aria-label="Call bluff"
+          >
+            <img src="/BigRedButton.png" width="100" alt="Call bluff" />
+          </Link>
+        ) : (
+          <span className="bluff-button-disabled" aria-label="Call bluff is available after two letters">
+            <img src="/BigRedButton.png" width="100" alt="" />
+          </span>
+        )}
       </main>
     </PageFrame>
   );

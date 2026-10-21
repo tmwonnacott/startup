@@ -56,8 +56,15 @@
 	line-height: 0;
 }
 
-.game-screen > a img {
+.game-screen > a img,
+.game-screen > .bluff-button-disabled img {
 	display: block;
+}
+
+.game-screen > .bluff-button-disabled {
+	align-self: center;
+	line-height: 0;
+	opacity: 0.5;
 }
 
 .call-bluff {
