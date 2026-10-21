@@ -22,6 +22,12 @@
 	overflow-wrap: anywhere;
 }
 
+.game-screen .letter-form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 .game-screen h3 {
 	margin: 6px 0;
 	font-size: 1.25rem;

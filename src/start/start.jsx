@@ -42,22 +42,29 @@ export function StartGame() {
             {currentLetters[currentLetters.length - 1]}
           </h3>
         )}
-        <input
-          type="text"
-          className="form-control letter-input"
-          maxLength="1"
-          aria-label="Choose a letter"
-          value={letter}
-          onChange={(event) => setLetter(event.target.value.toUpperCase().replace(/[^A-Z]/g, '').slice(0, 1))}
-        />
-        <button
-          type="button"
-          className="btn btn-primary submit-letter"
-          onClick={submitLetter}
-          disabled={!/^[A-Z]$/.test(letter)}
+        <form
+          className="letter-form"
+          onSubmit={(event) => {
+            event.preventDefault();
+            submitLetter();
+          }}
         >
-          Submit Letter
-        </button>
+          <input
+            type="text"
+            className="form-control letter-input"
+            maxLength="1"
+            aria-label="Choose a letter"
+            value={letter}
+            onChange={(event) => setLetter(event.target.value.toUpperCase().replace(/[^A-Z]/g, '').slice(0, 1))}
+          />
+          <button
+            type="submit"
+            className="btn btn-primary submit-letter"
+            disabled={!/^[A-Z]$/.test(letter)}
+          >
+            Submit Letter
+          </button>
+        </form>
         <p className="call-bluff">CALL BLUFF!</p>
         {currentLetters.length >= 2 ? (
           <Link
