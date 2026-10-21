@@ -6,11 +6,13 @@ import './start.css';
 export function StartGame() {
   const [letter, setLetter] = useState('');
   const [currentLetters, setCurrentLetters] = useState([]);
+  const [currentPlayer, setCurrentPlayer] = useState(1);
 
   function submitLetter() {
     const submittedLetter = letter.trim().toUpperCase();
     if (submittedLetter) {
       setCurrentLetters((letters) => [...letters, submittedLetter]);
+      setCurrentPlayer((player) => (player === 1 ? 2 : 1));
     }
     setLetter('');
   }
@@ -27,10 +29,11 @@ export function StartGame() {
       }
     >
       <main className="container text-center game-screen">
+        <p className="current-player-turn">Player {currentPlayer}&apos;s Turn</p>
         <h2>Current Letters</h2>
-        <p className="current-letters">{currentLetters.join('') || 'None'}</p>
+        <p className="current-letters">{currentLetters.join('') || '_'}</p>
         <h3>Player 2 Chose the Letter: [PLAYER2 LETTER PLACEHOLDER]</h3>
-        <h3>Player 1 Choose a Letter</h3>
+        <h3>Player {currentPlayer} Choose a Letter</h3>
         <input
           type="text"
           className="form-control letter-input"
