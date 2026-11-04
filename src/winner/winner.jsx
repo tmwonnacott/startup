@@ -2,26 +2,28 @@ import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { PageFrame } from '../shared/pageFrame';
 import { saveLeaderboardScore } from '../leaderboard/leaderboardStorage';
+import { AccountContext } from '../shared/accountContext';
 import './winner.css';
 
 export function Winner() {
   const { state } = useLocation();
   const word = state?.word;
   const navigate = useNavigate();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const { accountName, accountLoading } = React.useContext(AccountContext);
   const [submitError, setSubmitError] = useState('');
+  const isLoggedIn = !accountLoading
+    && accountName !== 'Guest'
+    && accountName !== 'Account unavailable';
 
   function submitScore(event) {
     event.preventDefault();
-    const trimmedUsername = username.trim();
-    if (!trimmedUsername || !password) {
+    if (!isLoggedIn) {
       return;
     }
 
     try {
       saveLeaderboardScore({
-        username: trimmedUsername,
+        username: accountName,
         word: typeof word === 'string' ? word : '',
         length: typeof word === 'string' ? word.length : 0,
       });
@@ -51,31 +53,27 @@ export function Winner() {
         <br></br>
         {word && <h2>Your Word: {word}</h2>}
         <form className="win-leaderboard" aria-labelledby="leaderboard-title" onSubmit={submitScore}>
-          <h3 id="leaderboard-title">Submit to the leaderboard</h3>
-          <input
-            type="text"
-            aria-label="Username"
-            placeholder="Enter Username"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-            autoComplete="username"
-            required
-          />
-          <input
-            type="password"
-            aria-label="Password"
-            placeholder="Enter Password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            autoComplete="current-password"
-            required
-          />
-          <p>Password is required for this local demo but is not stored.</p>
+          <div className="win-leaderboard-heading">
+            <h3 id="leaderboard-title">
+              {isLoggedIn ? '' : 'Login to Submit to Leaderboard'}
+            </h3>
+            {!accountLoading && !isLoggedIn && (
+              <Link
+                className="win-button"
+                to="/login"
+                state={{ returnTo: '/winner', returnState: state }}
+              >
+                Login/Register
+              </Link>
+            )}
+          </div>
+          {accountLoading && <h3 id = 'leaderboard-title'>Checking account...</h3>}
+          {isLoggedIn && <h3>Submitting as {accountName}</h3>}
           {submitError && <p role="alert">{submitError}</p>}
           <button
             className="win-button win-button--secondary"
             type="submit"
-            disabled={!username.trim() || !password}
+            disabled={accountLoading || !isLoggedIn}
           >
             Submit to Leaderboard
           </button>

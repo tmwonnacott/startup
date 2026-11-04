@@ -61,6 +61,25 @@
 	gap: 0.75rem;
 }
 
+.win-leaderboard-heading {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem 1rem;
+}
+
+.win-leaderboard-heading h3 {
+	margin: 0;
+}
+
+.win-leaderboard-heading .win-button {
+	min-width: 0;
+	min-height: 44px;
+	padding: 0.5rem 1rem;
+	font-size: 1rem;
+}
+
 .win-actions {
 	flex-direction: row;
 	flex-wrap: wrap;

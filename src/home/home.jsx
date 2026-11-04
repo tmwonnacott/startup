@@ -16,7 +16,7 @@ export function Home() {
             <Link to="/leaderboard" className="btn btn-primary">Leaderboard</Link>
             <Link to="/rules" className="btn btn-primary">Rules</Link>
             {!accountLoading && (accountName === 'Guest' || accountName === 'Account unavailable') && (
-              <Link to="/login" className="btn btn-primary">Login</Link>
+              <Link to="/login" className="btn btn-primary">Login/Register</Link>
             )}
           </nav>
           <p>Thomas Wonnacott</p>
