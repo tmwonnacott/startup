@@ -24,7 +24,7 @@ export function StartGame() {
     setLetter('');
     setError('');
 
-    if (nextLetters.length >= 3) {
+    if (nextLetters.length >= 4) {
       setCheckingWord(true);
       try {
         const submittedWord = nextLetters.join('');

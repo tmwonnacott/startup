@@ -162,6 +162,7 @@
     background: linear-gradient(0deg, rgb(34, 46, 116), rgb(97, 150, 172));
     color: white;
     font-size: 20px;
+    text-decoration: none;
 }
 
 .standard-page .btn-primary:hover {
