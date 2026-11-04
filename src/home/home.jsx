@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageFrame } from '../shared/pageFrame';
+import { LoginPanel } from '../auth/auth';
 
 export function Home() {
   const [gameCode, setGameCode] = useState('');
@@ -21,6 +22,7 @@ export function Home() {
       }
     >
       <main className="container text-center home-main">
+        <LoginPanel />
         <Link to="/waitingroom" className="btn btn-primary">Start Game</Link>
         <div className="join-game">
           <Link to="/start" className="btn btn-primary">Join Game</Link>

@@ -10,6 +10,7 @@ import { BluffCalled } from './bluffcalled/bluffcalled';
 import { Leaderboard } from './leaderboard/leaderboard';
 import { Loser } from './loser/loser';
 import { Winner } from './winner/winner';
+import { Profile } from './auth/auth';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -36,6 +37,7 @@ export default function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/start" element={<StartGame />} />
         <Route path="/waitingroom" element={<WaitingRoom />} />
         <Route path="/rules" element={<Rules />} />
