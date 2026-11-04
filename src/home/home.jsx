@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageFrame } from '../shared/pageFrame';
+import { AccountContext } from '../shared/accountContext';
 
 export function Home() {
   const [gameCode, setGameCode] = useState('');
+  const { accountName, accountLoading } = React.useContext(AccountContext);
 
   return (
     <PageFrame
@@ -13,7 +15,9 @@ export function Home() {
           <nav aria-label="Main navigation">
             <Link to="/leaderboard" className="btn btn-primary">Leaderboard</Link>
             <Link to="/rules" className="btn btn-primary">Rules</Link>
-            <Link to="/login" className="btn btn-primary">Login</Link>
+            {!accountLoading && (accountName === 'Guest' || accountName === 'Account unavailable') && (
+              <Link to="/login" className="btn btn-primary">Login</Link>
+            )}
           </nav>
           <p>Thomas Wonnacott</p>
           <a id="Github" href="https://github.com/tmwonnacott/startup">GitHub Repo</a>

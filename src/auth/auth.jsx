@@ -1,9 +1,11 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { PageFrame } from '../shared/pageFrame';
+import { AccountContext } from '../shared/accountContext';
 
 export function LoginPanel() {
   const navigate = useNavigate();
+  const { setAccountName } = React.useContext(AccountContext);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [error, setError] = React.useState('');
@@ -28,7 +30,8 @@ export function LoginPanel() {
       }
 
       await response.json();
-      navigate('/profile');
+      setAccountName(email);
+      navigate('/');
     } catch (requestError) {
       console.error('Authentication request failed:', requestError);
       setError('Unable to connect to the authentication service.');

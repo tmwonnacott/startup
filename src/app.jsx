@@ -11,6 +11,7 @@ import { Leaderboard } from './leaderboard/leaderboard';
 import { Loser } from './loser/loser';
 import { Winner } from './winner/winner';
 import { LoginPage, Profile } from './auth/auth';
+import { AccountContext } from './shared/accountContext';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -24,42 +25,8 @@ function ScrollToTop() {
 
 function AccountStatus() {
   const { pathname } = useLocation();
-  const [accountName, setAccountName] = React.useState('Guest');
+  const { accountName, setAccountName } = React.useContext(AccountContext);
   const isLoggedIn = accountName !== 'Guest' && accountName !== 'Account unavailable';
-
-  React.useEffect(() => {
-    let active = true;
-
-    async function loadAccount() {
-      try {
-        const response = await fetch('/api/user/me');
-        if (response.status === 401) {
-          if (active) {
-            setAccountName('Guest');
-          }
-          return;
-        }
-        if (!response.ok) {
-          throw new Error(`Account request failed with status ${response.status}`);
-        }
-
-        const user = await response.json();
-        if (active) {
-          setAccountName(user.email);
-        }
-      } catch (error) {
-        console.error('Unable to load account status:', error);
-        if (active) {
-          setAccountName('Account unavailable');
-        }
-      }
-    }
-
-    loadAccount();
-    return () => {
-      active = false;
-    };
-  }, [pathname]);
 
   async function handleLogout() {
     try {
@@ -85,18 +52,52 @@ function AccountStatus() {
   );
 }
 
-function NotFound() {
-  return (
-    <main className="standard-page not-found-page">
-      <h1>Page not found</h1>
-      <Link to="/">Back to Menu</Link>
-    </main>
-  );
-}
+function AppRoutes() {
+  const { pathname } = useLocation();
+  const [accountName, setAccountName] = React.useState('Guest');
+  const [accountLoading, setAccountLoading] = React.useState(true);
 
-export default function App() {
+  React.useEffect(() => {
+    let active = true;
+
+    async function loadAccount() {
+      setAccountLoading(true);
+      try {
+        const response = await fetch('/api/user/me');
+        if (response.status === 401) {
+          if (active) {
+            setAccountName('Guest');
+          }
+          return;
+        }
+        if (!response.ok) {
+          throw new Error(`Account request failed with status ${response.status}`);
+        }
+
+        const user = await response.json();
+        if (active) {
+          setAccountName(user.email);
+        }
+      } catch (error) {
+        console.error('Unable to load account status:', error);
+        if (active) {
+          setAccountName('Account unavailable');
+        }
+      } finally {
+        if (active) {
+          setAccountLoading(false);
+        }
+      }
+    }
+
+    loadAccount();
+    return () => {
+      active = false;
+    };
+  }, [pathname]);
+
   return (
-    <BrowserRouter>
+    <AccountContext.Provider value={{ accountName, accountLoading, setAccountName }}>
       <ScrollToTop />
       <AccountStatus />
       <Routes>
@@ -112,6 +113,23 @@ export default function App() {
         <Route path="/winner" element={<Winner />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+    </AccountContext.Provider>
+  );
+}
+
+function NotFound() {
+  return (
+    <main className="standard-page not-found-page">
+      <h1>Page not found</h1>
+      <Link to="/">Back to Menu</Link>
+    </main>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppRoutes />
     </BrowserRouter>
   );
 }
