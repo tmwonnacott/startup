@@ -1,8 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { PageFrame } from '../shared/pageFrame';
+import { AccountContext } from '../shared/accountContext';
+import { getPlayerLabel } from '../shared/playerLabel';
 
 export function Rules() {
+  const { accountName } = React.useContext(AccountContext);
+
   return (
     <PageFrame className="rules-page" footer={<p>NeverWord © 2026</p>}>
       <main className="rules-main">
@@ -13,9 +17,9 @@ export function Rules() {
         <p>2. Someone calls bluff. The opponent must write a real word that starts with the current letters. If they can&apos;t think of one, they lose.</p>
         <section className="rules-example" aria-label="Example round">
           <p>Example:</p>
-          <p>Word: _ Player 1 submits "R"</p>
+          <p>Word: _ {getPlayerLabel(1, accountName)} submits "R"</p>
           <p>Word: R_ Player 2 submits "A"</p>
-          <p>Word: RA_ Player 1 submits "S"</p>
+          <p>Word: RA_ {getPlayerLabel(1, accountName)} submits "S"</p>
           <p>Word: RAP_ Player 2 thinks of the word "Raspberry" and puts a "P"</p>
           <p>Now the current word is RASP, which the game detects as a real word, so Player 2 loses</p>
         </section>

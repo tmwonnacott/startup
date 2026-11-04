@@ -57,6 +57,12 @@
 	font-size: 24px;
 }
 
+.game-screen .word-check-error {
+	margin: 4px 0;
+	color: #a00000;
+	font-weight: bold;
+}
+
 .game-screen > a {
 	align-self: center;
 	line-height: 0;

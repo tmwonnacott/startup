@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { AccountContext } from '../shared/accountContext';
+import { getPlayerLabel } from '../shared/playerLabel';
 import './bluffcalled.css';
 
 export function BluffCalled() {
@@ -8,6 +10,7 @@ export function BluffCalled() {
   const [error, setError] = useState('');
   const { state } = useLocation();
   const navigate = useNavigate();
+  const { accountName } = React.useContext(AccountContext);
   const currentLetters = state?.currentLetters ?? 'None';
   const currentPlayer = state?.currentPlayer;
 
@@ -47,7 +50,7 @@ export function BluffCalled() {
   return (
     <div className="bluff-page">
       <header className="bluff-called-header">
-        <h1>PLAYER{currentPlayer ? ` ${currentPlayer} ` : ' '}CALLED BLUFF</h1>
+        <h1>{currentPlayer ? `${getPlayerLabel(currentPlayer, accountName)} ` : ''}CALLED BLUFF</h1>
       </header>
       <main>
         <h2>Type a word that starts with {currentLetters} or admit to bluffing.</h2>

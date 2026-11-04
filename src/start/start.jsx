@@ -1,19 +1,71 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { PageFrame } from '../shared/pageFrame';
+import { AccountContext } from '../shared/accountContext';
+import { getPlayerLabel } from '../shared/playerLabel';
 import './start.css';
 
 export function StartGame() {
   const [letter, setLetter] = useState('');
   const [currentLetters, setCurrentLetters] = useState([]);
   const [currentPlayer, setCurrentPlayer] = useState(1);
+  const [checkingWord, setCheckingWord] = useState(false);
+  const [error, setError] = useState('');
+  const { accountName } = React.useContext(AccountContext);
+  const navigate = useNavigate();
 
-  function submitLetter() {
-    if (/^[A-Z]$/.test(letter)) {
-      setCurrentLetters((letters) => [...letters, letter]);
+  async function submitLetter() {
+    if (!/^[A-Z]$/.test(letter) || checkingWord) {
+      return;
+    }
+
+    const submittedLetter = letter;
+    const nextLetters = [...currentLetters, submittedLetter];
+    setLetter('');
+    setError('');
+
+    if (nextLetters.length >= 3) {
+      setCheckingWord(true);
+      try {
+        const submittedWord = nextLetters.join('');
+        const response = await fetch(
+          `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(submittedWord.toLowerCase())}`,
+        );
+        if (response.status === 404) {
+          setCurrentLetters(nextLetters);
+          setCurrentPlayer((player) => (player === 1 ? 2 : 1));
+          return;
+        }
+        if (!response.ok) {
+          throw new Error(`Dictionary lookup failed with status ${response.status}`);
+        }
+
+        const entries = await response.json();
+        if (Array.isArray(entries) && entries.length > 0) {
+          navigate('/loser', {
+            state: {
+              losingPlayer: currentPlayer,
+              word: submittedWord,
+              reason: 'submitted a real word',
+            },
+          });
+          return;
+        }
+
+        setCurrentLetters(nextLetters);
+        setCurrentPlayer((player) => (player === 1 ? 2 : 1));
+      } catch (requestError) {
+        console.error('Unable to verify submitted word:', requestError);
+        setError('Could not verify the word right now. Please try again.');
+        setLetter(submittedLetter);
+      } finally {
+        setCheckingWord(false);
+      }
+    } else {
+      setCurrentLetters(nextLetters);
       setCurrentPlayer((player) => (player === 1 ? 2 : 1));
     }
-    setLetter('');
+
   }
 
   return (
@@ -29,16 +81,18 @@ export function StartGame() {
     >
       <main className="container text-center game-screen">
         <p className="current-player-turn">
-          {currentPlayer === 1
-            ? 'Submit a letter Player 1'
-            : 'Waiting for Player 2 to Submit a Letter'}
+          {checkingWord
+            ? 'Checking word...'
+            : currentPlayer === 1
+              ? `Submit a letter ${getPlayerLabel(1, accountName)}`
+              : 'Waiting for Player 2 to Submit a Letter'}
         </p>
         <br></br>
         <h2>Current Letters</h2>
         <p className="current-letters">{currentLetters.join('') || '_'}</p>
         {currentLetters.length > 0 && (
           <h3>
-            Player {currentPlayer === 1 ? 2 : 1} Chose the Letter:{' '}
+            {getPlayerLabel(currentPlayer === 1 ? 2 : 1, accountName)} Chose the Letter:{' '}
             {currentLetters[currentLetters.length - 1]}
           </h3>
         )}
@@ -56,15 +110,17 @@ export function StartGame() {
             aria-label="Choose a letter"
             value={letter}
             onChange={(event) => setLetter(event.target.value.toUpperCase().replace(/[^A-Z]/g, '').slice(0, 1))}
+            disabled={checkingWord}
           />
           <button
             type="submit"
             className="btn btn-primary submit-letter"
-            disabled={!/^[A-Z]$/.test(letter)}
+            disabled={!/^[A-Z]$/.test(letter) || checkingWord}
           >
-            Submit Letter
+            {checkingWord ? 'Checking...' : 'Submit Letter'}
           </button>
         </form>
+        {error && <p className="word-check-error" role="alert">{error}</p>}
         <p className="call-bluff">CALL BLUFF!</p>
         {currentLetters.length >= 2 ? (
           <Link

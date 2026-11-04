@@ -1,9 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { PageFrame } from '../shared/pageFrame';
+import { AccountContext } from '../shared/accountContext';
+import { getPlayerLabel } from '../shared/playerLabel';
 import './loser.css';
 
 export function Loser() {
+  const { state } = useLocation();
+  const { accountName } = React.useContext(AccountContext);
+
   return (
     <PageFrame
       className="loss-page"
@@ -17,7 +22,11 @@ export function Loser() {
     >
       <main>
         <h2>LOSER</h2>
-        <p>You were bluffing or you submitted a word that isn't a word or you spelled a word (need API for this functionality)</p>
+        {state?.losingPlayer ? (
+          <p>{getPlayerLabel(state.losingPlayer, accountName)} loses for completing the real word {state.word}.</p>
+        ) : (
+          <p>You were bluffing or submitted a word that is not a real word.</p>
+        )}
         <Link className="loss-button" to="/start">Play Again With Same Players</Link>
         <Link className="loss-button" to="/">Back to Menu</Link>
       </main>
