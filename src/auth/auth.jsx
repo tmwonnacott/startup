@@ -81,6 +81,19 @@ export function LoginPanel() {
   );
 }
 
+export function LoginPage() {
+  return (
+    <PageFrame
+      className="home-page"
+      footer={<Link to="/" className="btn btn-primary">Back to game</Link>}
+    >
+      <main className="container text-center profile-main">
+        <LoginPanel />
+      </main>
+    </PageFrame>
+  );
+}
+
 export function Profile() {
   const navigate = useNavigate();
   const [email, setEmail] = React.useState('');

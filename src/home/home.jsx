@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageFrame } from '../shared/pageFrame';
-import { LoginPanel } from '../auth/auth';
 
 export function Home() {
   const [gameCode, setGameCode] = useState('');
@@ -14,6 +13,7 @@ export function Home() {
           <nav aria-label="Main navigation">
             <Link to="/leaderboard" className="btn btn-primary">Leaderboard</Link>
             <Link to="/rules" className="btn btn-primary">Rules</Link>
+            <Link to="/login" className="btn btn-primary">Login</Link>
           </nav>
           <p>Thomas Wonnacott</p>
           <a id="Github" href="https://github.com/tmwonnacott/startup">GitHub Repo</a>
@@ -22,7 +22,6 @@ export function Home() {
       }
     >
       <main className="container text-center home-main">
-        <LoginPanel />
         <Link to="/waitingroom" className="btn btn-primary">Start Game</Link>
         <div className="join-game">
           <Link to="/start" className="btn btn-primary">Join Game</Link>
