@@ -50,18 +50,41 @@ app.post('/api/auth', async (req, res) => {
 
 // login
 app.put('/api/auth', async (req, res) => {
-  res.send({ email: 'marta@id.com' });
+  const user = await getUser('email', req.body.email);
+  if (user && (await bcrypt.compare(req.body.password, user.password))) {
+    setAuthCookie(res, user);
+    res.send({ email: user.email });
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
 });
 
 // logout
 app.delete('/api/auth', async (req, res) => {
+  const token = req.cookies['token'];
+  const user = await getUser('token', token);
+  if (user) {
+    clearAuthCookie(res, user);
+  }
+
   res.send({});
 });
 
 // getMe
-app.get('/api/user', async (req, res) => {
-  res.send({ email: 'marta@id.com' });
+app.get('/api/user/me', async (req, res) => {
+  const token = req.cookies['token'];
+  const user = await getUser('token', token);
+  if (user) {
+    res.send({ email: user.email });
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
 });
+
+function clearAuthCookie(res, user) {
+  delete user.token;
+  res.clearCookie('token');
+}
 
 const port = process.env.PORT || 3000;
 app.listen(port, function () {
