@@ -83,11 +83,49 @@
 	cursor: pointer;
 }
 
+.bluff-word-form {
+	display: flex;
+	width: min(100%, 420px);
+	flex-direction: column;
+	align-items: center;
+	gap: 1.25rem;
+}
+
+.bluff-page main button {
+	min-width: 200px;
+	min-height: 64px;
+	margin: 0.25rem;
+	padding: 1rem 2rem;
+	border: 1px solid #000303;
+	border-radius: 60px;
+	background: linear-gradient(0deg, var(--button-blue-dark), var(--button-blue-light));
+	color: white;
+	font: inherit;
+	font-size: 1.125rem;
+	cursor: pointer;
+}
+
+.bluff-page main button:hover:not(:disabled) {
+	background: linear-gradient(0deg, var(--button-blue-dark-hover), var(--button-blue-light-hover));
+}
+
+.bluff-page main button:disabled {
+	cursor: wait;
+	opacity: 0.65;
+}
+
+.word-check-error {
+	margin: 0;
+	color: #a00000;
+	font-weight: bold;
+}
+
 .bluff-page main a:hover {
 	background: linear-gradient(0deg, var(--button-blue-dark-hover), var(--button-blue-light-hover));
 }
 
 .bluff-page main a:focus-visible,
+.bluff-page main button:focus-visible,
 .bluff-page main input:focus-visible {
 	outline: 3px solid var(--page-blue);
 	outline-offset: 3px;
