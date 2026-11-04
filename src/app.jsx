@@ -25,6 +25,7 @@ function ScrollToTop() {
 function AccountStatus() {
   const { pathname } = useLocation();
   const [accountName, setAccountName] = React.useState('Guest');
+  const isLoggedIn = accountName !== 'Guest' && accountName !== 'Account unavailable';
 
   React.useEffect(() => {
     let active = true;
@@ -60,7 +61,28 @@ function AccountStatus() {
     };
   }, [pathname]);
 
-  return <div className="account-status" role="status">{accountName || 'Guest'}</div>;
+  async function handleLogout() {
+    try {
+      const response = await fetch('/api/auth', { method: 'DELETE' });
+      if (!response.ok) {
+        throw new Error(`Logout request failed with status ${response.status}`);
+      }
+      setAccountName('Guest');
+    } catch (error) {
+      console.error('Unable to log out:', error);
+    }
+  }
+
+  return (
+    <div className="account-status" role="status">
+      <span>{accountName || 'Guest'}</span>
+      {pathname === '/' && isLoggedIn && (
+        <button type="button" className="home-logout" onClick={handleLogout}>
+          Logout
+        </button>
+      )}
+    </div>
+  );
 }
 
 function NotFound() {
