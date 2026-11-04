@@ -22,6 +22,47 @@ function ScrollToTop() {
   return null;
 }
 
+function AccountStatus() {
+  const { pathname } = useLocation();
+  const [accountName, setAccountName] = React.useState('Guest');
+
+  React.useEffect(() => {
+    let active = true;
+
+    async function loadAccount() {
+      try {
+        const response = await fetch('/api/user/me');
+        if (response.status === 401) {
+          if (active) {
+            setAccountName('Guest');
+          }
+          return;
+        }
+        if (!response.ok) {
+          throw new Error(`Account request failed with status ${response.status}`);
+        }
+
+        const user = await response.json();
+        if (active) {
+          setAccountName(user.email);
+        }
+      } catch (error) {
+        console.error('Unable to load account status:', error);
+        if (active) {
+          setAccountName('Account unavailable');
+        }
+      }
+    }
+
+    loadAccount();
+    return () => {
+      active = false;
+    };
+  }, [pathname]);
+
+  return <div className="account-status" role="status">{accountName || 'Guest'}</div>;
+}
+
 function NotFound() {
   return (
     <main className="standard-page not-found-page">
@@ -35,6 +76,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <AccountStatus />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginPage />} />
