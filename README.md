@@ -98,13 +98,13 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [X] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits) Yessir
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
-- [ ] **Uses BCrypt to hash passwords** - I did not complete this part of the deliverable.
+- [X] **Node.js/Express HTTP service** - Yes I followed instructions
+- [X] **Static middleware for frontend** - Yes I followed instructions
+- [X] **Calls to third party endpoints** - I used a dictionary API to check if your word is a real word
+- [X] **Backend service endpoints** - Yes I followed instructions
+- [X] **Frontend calls service endpoints** - Yes I followed instructions
+- [X] **Supports registration, login, logout, and restricted endpoint** - Yes, I added login and registration as an option at the home page and as an option for at the end if you want to submit to your leaderboard
+- [X] **Uses BCrypt to hash passwords** - Yes I followed instructions
 
 ## 🚀 DB deliverable
 
