@@ -56,7 +56,7 @@ export function StartGame() {
         setCurrentPlayer((player) => (player === 1 ? 2 : 1));
       } catch (requestError) {
         console.error('Unable to verify submitted word:', requestError);
-        setError('Could not verify the word right now. Please try again.');
+        setError('The dictionary service is unavailable. Your letter was not submitted; please try again.');
         setLetter(submittedLetter);
       } finally {
         setCheckingWord(false);

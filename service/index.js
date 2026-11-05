@@ -28,6 +28,7 @@ function getUser(field, value) {
 function setAuthCookie(res, user) {
   user.token = uuidv4();
   res.cookie('token', user.token, {
+    path: '/',
     secure: true,
     httpOnly: true,
     sameSite: 'strict',
@@ -36,7 +37,7 @@ function setAuthCookie(res, user) {
 
 function clearAuthCookie(res, user) {
   delete user.token;
-  res.clearCookie('token');
+  res.clearCookie('token', { path: '/' });
 }
 
 app.post('/api/auth', async (req, res) => {
@@ -93,7 +94,7 @@ app.use((req, res, next) => {
   next();
 });
 
-const port = process.argv.length > 2 ? process.argv[2] : 4000;
+const port = process.env.PORT || (process.argv.length > 2 ? process.argv[2] : 4000);
 app.listen(port, function () {
   console.log(`Listening on port ${port}`);
 });
