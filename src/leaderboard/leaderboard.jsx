@@ -41,6 +41,9 @@ export function Leaderboard() {
 
   const { entries = [], latestScore = null } = storageState.data ?? {};
   const displayedLatestScore = showLatestScore ? state?.latestScore : latestScore;
+  const formatScoreDate = (date) => (
+    date ? new Date(date).toLocaleDateString() : 'Date unavailable'
+  );
 
   return (
     <PageFrame
@@ -63,6 +66,7 @@ export function Leaderboard() {
                 <th scope="col">Username</th>
                 <th scope="col">Word</th>
                 <th scope="col">Number of Letters</th>
+                <th scope="col">Date</th>
               </tr>
             </thead>
             <tbody>
@@ -70,7 +74,8 @@ export function Leaderboard() {
                 <tr className="current-game-score">
                   <td>{displayedLatestScore.username} (This Game)</td>
                   <td>{displayedLatestScore.word}</td>
-                  <td>{displayedLatestScore.length}</td>
+                  <td className="leaderboard-length">{displayedLatestScore.length}</td>
+                  <td>{formatScoreDate(displayedLatestScore.date)}</td>
                 </tr>
               )}
               {entries.map((entry, index) => (
@@ -80,7 +85,8 @@ export function Leaderboard() {
                     <span>{entry.username}</span>
                   </td>
                   <td>{entry.word}</td>
-                  <td>{entry.length}</td>
+                  <td className="leaderboard-length">{entry.length}</td>
+                  <td>{formatScoreDate(entry.date)}</td>
                 </tr>
               ))}
             </tbody>

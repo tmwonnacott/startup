@@ -46,7 +46,7 @@
 
 .leaderboard-page table {
 	width: 100%;
-	min-width: 620px;
+	min-width: 760px;
 	border-collapse: collapse;
 	text-align: left;
 }
@@ -126,14 +126,18 @@
 	background: #c9e4ff;
 }
 
-.leaderboard-page td:last-child {
+.leaderboard-page td.leaderboard-length {
 	color: var(--leader-green);
 	font-weight: 700;
 	text-align: right;
-font-variant-numeric: tabular-nums;
+	font-variant-numeric: tabular-nums;
 }
 
 .leaderboard-page th:last-child {
+	text-align: left;
+}
+
+.leaderboard-page th:nth-child(3) {
 	text-align: right;
 }
 

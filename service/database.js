@@ -62,12 +62,12 @@ async function removeUserToken(token) {
 async function addLeaderboardScore(score) {
   const savedScore = { ...score, createdAt: new Date() };
   await leaderboardCollection.insertOne(savedScore);
-  return score;
+  return savedScore;
 }
 
 async function getLeaderboardEntries() {
   return leaderboardCollection
-    .find({}, { projection: { _id: 0, username: 1, word: 1, length: 1 } })
+    .find({}, { projection: { _id: 0, username: 1, word: 1, length: 1, createdAt: 1 } })
     .sort({ length: -1, createdAt: -1 })
     .limit(10)
     .toArray();

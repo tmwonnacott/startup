@@ -3,7 +3,11 @@ function isScoreEntry(entry) {
     && typeof entry.username === 'string'
     && typeof entry.word === 'string'
     && Number.isInteger(entry.length)
-    && entry.length === entry.word.length;
+    && entry.length === entry.word.length
+    && (
+      entry.date === null
+      || (typeof entry.date === 'string' && Number.isFinite(Date.parse(entry.date)))
+    );
 }
 
 async function readLeaderboardResponse(response) {

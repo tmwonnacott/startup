@@ -101,7 +101,7 @@ app.get('/api/user/me', async (req, res) => {
 
 app.get('/api/leaderboard', async (req, res) => {
   const entries = await getLeaderboardEntries();
-  res.json({ entries, latestScore: null });
+  res.json({ entries: entries.map(formatLeaderboardScore), latestScore: null });
 });
 
 app.post('/api/leaderboard', async (req, res) => {
@@ -122,10 +122,22 @@ app.post('/api/leaderboard', async (req, res) => {
     word,
     length: word.length,
   };
-  await addLeaderboardScore(score);
+  const savedScore = await addLeaderboardScore(score);
   const entries = await getLeaderboardEntries();
-  res.status(201).json({ entries, latestScore: score });
+  res.status(201).json({
+    entries: entries.map(formatLeaderboardScore),
+    latestScore: formatLeaderboardScore(savedScore),
+  });
 });
+
+function formatLeaderboardScore(score) {
+  return {
+    username: score.username,
+    word: score.word,
+    length: score.length,
+    date: score.createdAt instanceof Date ? score.createdAt.toISOString() : null,
+  };
+}
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
