@@ -36,6 +36,11 @@ ENDSSH
 printf "\n----> Copy the distribution package to the target\n"
 scp -r -i "$key" build/* ubuntu@$hostname:services/$service
 
+# The service resolves dbconfig.json from the parent services directory.
+printf "\n----> Copy MongoDB configuration to the target\n"
+scp -i "$key" dbconfig.json ubuntu@$hostname:services/dbconfig.json
+ssh -i "$key" ubuntu@$hostname "chmod 600 services/dbconfig.json"
+
 # Step 4
 printf "\n----> Deploy the service on the target\n"
 ssh -i "$key" ubuntu@$hostname << ENDSSH
