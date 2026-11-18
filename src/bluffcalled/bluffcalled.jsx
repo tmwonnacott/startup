@@ -11,7 +11,7 @@ export function BluffCalled() {
   const { state } = useLocation();
   const navigate = useNavigate();
   const { accountName } = React.useContext(AccountContext);
-  const currentLetters = state?.currentLetters ?? 'None';
+  const currentLetters = typeof state?.currentLetters === 'string' ? state.currentLetters : '';
   const currentPlayer = state?.currentPlayer;
 
   async function submitWord(event) {
@@ -23,12 +23,18 @@ export function BluffCalled() {
 
     setCheckingWord(true);
     setError('');
+    const displayWord = submittedWord.toUpperCase();
     try {
+      if (!submittedWord.startsWith(currentLetters.toLowerCase())) {
+        navigate('/loser', { state: { word: displayWord } });
+        return;
+      }
+
       const response = await fetch(
         `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(submittedWord)}`,
       );
       if (response.status === 404) {
-        navigate('/loser');
+        navigate('/loser', { state: { word: displayWord } });
         return;
       }
       if (!response.ok) {
@@ -37,7 +43,7 @@ export function BluffCalled() {
 
       const entries = await response.json();
       navigate(Array.isArray(entries) && entries.length > 0 ? '/winner' : '/loser', {
-        state: { word: word.trim().toUpperCase() },
+        state: { word: displayWord },
       });
     } catch (requestError) {
       console.error('Unable to verify submitted word:', requestError);
