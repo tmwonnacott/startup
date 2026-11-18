@@ -5,7 +5,9 @@ const bcrypt = require('bcryptjs');
 const { v4: uuidv4 } = require('uuid');
 const {
   addUser,
+  addLeaderboardScore,
   connectToDatabase,
+  getLeaderboardEntries,
   getUserByEmail,
   getUserByToken,
   removeUserToken,
@@ -95,6 +97,34 @@ app.get('/api/user/me', async (req, res) => {
   } else {
     res.status(401).send({ msg: 'Unauthorized' });
   }
+});
+
+app.get('/api/leaderboard', async (req, res) => {
+  const entries = await getLeaderboardEntries();
+  res.json({ entries, latestScore: null });
+});
+
+app.post('/api/leaderboard', async (req, res) => {
+  const user = await getUserByToken(req.cookies.token);
+  if (!user) {
+    res.status(401).json({ msg: 'Unauthorized' });
+    return;
+  }
+
+  const { word } = req.body || {};
+  if (typeof word !== 'string' || word.length === 0) {
+    res.status(400).json({ msg: 'A word is required' });
+    return;
+  }
+
+  const score = {
+    username: user.email,
+    word,
+    length: word.length,
+  };
+  await addLeaderboardScore(score);
+  const entries = await getLeaderboardEntries();
+  res.status(201).json({ entries, latestScore: score });
 });
 
 app.get('/api/health', (req, res) => {

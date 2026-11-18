@@ -11,25 +11,32 @@ export function Winner() {
   const navigate = useNavigate();
   const { accountName, accountLoading } = React.useContext(AccountContext);
   const [submitError, setSubmitError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
   const isLoggedIn = !accountLoading
     && accountName !== 'Guest'
     && accountName !== 'Account unavailable';
 
-  function submitScore(event) {
+  async function submitScore(event) {
     event.preventDefault();
-    if (!isLoggedIn) {
+    if (!isLoggedIn || submitting) {
       return;
     }
 
+    setSubmitError('');
+    setSubmitting(true);
     try {
-      saveLeaderboardScore({
+      const data = await saveLeaderboardScore({
         username: accountName,
         word: typeof word === 'string' ? word : '',
         length: typeof word === 'string' ? word.length : 0,
       });
-      navigate('/leaderboard', { state: { showLatestScore: true } });
+      navigate('/leaderboard', {
+        state: { showLatestScore: true, latestScore: data.latestScore },
+      });
     } catch (error) {
       setSubmitError(error instanceof Error ? error.message : 'Could not save your score.');
+    } finally {
+      setSubmitting(false);
     }
   }
 
@@ -73,9 +80,9 @@ export function Winner() {
           <button
             className="win-button win-button--secondary"
             type="submit"
-            disabled={accountLoading || !isLoggedIn}
+            disabled={accountLoading || !isLoggedIn || submitting}
           >
-            Submit to Leaderboard
+            {submitting ? 'Submitting...' : 'Submit to Leaderboard'}
           </button>
         </form>
       </main>

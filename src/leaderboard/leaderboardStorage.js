@@ -1,5 +1,3 @@
-const leaderboardStorageKey = 'neverword-leaderboard';
-
 function isScoreEntry(entry) {
   return entry
     && typeof entry.username === 'string'
@@ -8,18 +6,21 @@ function isScoreEntry(entry) {
     && entry.length === entry.word.length;
 }
 
-export function loadLeaderboardData() {
-  const savedData = localStorage.getItem(leaderboardStorageKey);
-  if (!savedData) {
-    return { entries: [], latestScore: null };
+async function readLeaderboardResponse(response) {
+  if (!response.ok) {
+    let message = `Leaderboard request failed with status ${response.status}.`;
+    try {
+      const error = await response.json();
+      if (typeof error.msg === 'string') {
+        message = error.msg;
+      }
+    } catch {
+      // Keep the status-based message when the service does not return JSON.
+    }
+    throw new Error(message);
   }
 
-  let data;
-  try {
-    data = JSON.parse(savedData);
-  } catch {
-    throw new Error('Saved leaderboard data is unreadable. Clear the neverword-leaderboard localStorage entry to continue.');
-  }
+  const data = await response.json();
 
   if (
     !data
@@ -27,20 +28,22 @@ export function loadLeaderboardData() {
     || !data.entries.every(isScoreEntry)
     || !(data.latestScore === null || isScoreEntry(data.latestScore))
   ) {
-    throw new Error('Saved leaderboard data is invalid. Clear the neverword-leaderboard localStorage entry to continue.');
+    throw new Error('The leaderboard service returned invalid data.');
   }
 
   return data;
 }
 
-export function saveLeaderboardScore(score) {
-  const { entries } = loadLeaderboardData();
-  const updatedData = {
-    entries: [score, ...entries]
-      .sort((first, second) => second.length - first.length)
-      .slice(0, 10),
-    latestScore: score,
-  };
-  localStorage.setItem(leaderboardStorageKey, JSON.stringify(updatedData));
-  return updatedData;
+export async function loadLeaderboardData() {
+  const response = await fetch('/api/leaderboard');
+  return readLeaderboardResponse(response);
+}
+
+export async function saveLeaderboardScore(score) {
+  const response = await fetch('/api/leaderboard', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ word: score.word }),
+  });
+  return readLeaderboardResponse(response);
 }

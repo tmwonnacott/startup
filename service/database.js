@@ -25,11 +25,13 @@ function getMongoUri() {
 
 const client = new MongoClient(getMongoUri());
 const userCollection = client.db('neverword').collection('user');
+const leaderboardCollection = client.db('neverword').collection('leaderboard');
 
 async function connectToDatabase() {
   await client.connect();
   await client.db('neverword').command({ ping: 1 });
   await userCollection.createIndex({ email: 1 }, { unique: true });
+  await leaderboardCollection.createIndex({ length: -1, createdAt: -1 });
 }
 
 function getUserByEmail(email) {
@@ -57,14 +59,30 @@ async function removeUserToken(token) {
   }
 }
 
+async function addLeaderboardScore(score) {
+  const savedScore = { ...score, createdAt: new Date() };
+  await leaderboardCollection.insertOne(savedScore);
+  return score;
+}
+
+async function getLeaderboardEntries() {
+  return leaderboardCollection
+    .find({}, { projection: { _id: 0, username: 1, word: 1, length: 1 } })
+    .sort({ length: -1, createdAt: -1 })
+    .limit(10)
+    .toArray();
+}
+
 async function closeDatabaseConnection() {
   await client.close();
 }
 
 module.exports = {
   addUser,
+  addLeaderboardScore,
   closeDatabaseConnection,
   connectToDatabase,
+  getLeaderboardEntries,
   getUserByEmail,
   getUserByToken,
   removeUserToken,

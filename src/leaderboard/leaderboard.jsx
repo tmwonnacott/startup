@@ -14,22 +14,33 @@ export function Leaderboard() {
   });
 
   useEffect(() => {
-    try {
-      setStorageState({
-        data: loadLeaderboardData(),
-        error: '',
-        loading: false,
-      });
-    } catch (error) {
-      setStorageState({
-        data: null,
-        error: error instanceof Error ? error.message : 'Could not load the leaderboard.',
-        loading: false,
-      });
+    let active = true;
+
+    async function loadScores() {
+      try {
+        const data = await loadLeaderboardData();
+        if (active) {
+          setStorageState({ data, error: '', loading: false });
+        }
+      } catch (error) {
+        if (active) {
+          setStorageState({
+            data: null,
+            error: error instanceof Error ? error.message : 'Could not load the leaderboard.',
+            loading: false,
+          });
+        }
+      }
     }
+
+    loadScores();
+    return () => {
+      active = false;
+    };
   }, []);
 
   const { entries = [], latestScore = null } = storageState.data ?? {};
+  const displayedLatestScore = showLatestScore ? state?.latestScore : latestScore;
 
   return (
     <PageFrame
@@ -55,11 +66,11 @@ export function Leaderboard() {
               </tr>
             </thead>
             <tbody>
-              {showLatestScore && latestScore && (
+              {showLatestScore && displayedLatestScore && (
                 <tr className="current-game-score">
-                  <td>{latestScore.username} (This Game)</td>
-                  <td>{latestScore.word}</td>
-                  <td>{latestScore.length}</td>
+                  <td>{displayedLatestScore.username} (This Game)</td>
+                  <td>{displayedLatestScore.word}</td>
+                  <td>{displayedLatestScore.length}</td>
                 </tr>
               )}
               {entries.map((entry, index) => (
