@@ -3,9 +3,16 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const { v4: uuidv4 } = require('uuid');
+const {
+  addUser,
+  connectToDatabase,
+  getUserByEmail,
+  getUserByToken,
+  removeUserToken,
+  setUserToken,
+} = require('./database');
 
 const app = express();
-const users = [];
 
 app.use(express.json());
 app.use(cookieParser());
@@ -13,21 +20,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 async function createUser(email, password) {
   const passwordHash = await bcrypt.hash(password, 10);
-  const user = { email, password: passwordHash };
-  users.push(user);
-  return user;
+  return { email, password: passwordHash };
 }
 
-function getUser(field, value) {
-  if (value) {
-    return users.find((user) => user[field] === value);
-  }
-  return null;
-}
-
-function setAuthCookie(res, user) {
-  user.token = uuidv4();
-  res.cookie('token', user.token, {
+function setAuthCookie(res, token) {
+  res.cookie('token', token, {
     path: '/',
     secure: true,
     httpOnly: true,
@@ -35,26 +32,50 @@ function setAuthCookie(res, user) {
   });
 }
 
-function clearAuthCookie(res, user) {
-  delete user.token;
+function clearAuthCookie(res) {
   res.clearCookie('token', { path: '/' });
 }
 
 app.post('/api/auth', async (req, res) => {
-  if (await getUser('email', req.body.email)) {
+  const { email, password } = req.body || {};
+  if (typeof email !== 'string' || !email || typeof password !== 'string' || !password) {
+    res.status(400).send({ msg: 'Email and password are required' });
+    return;
+  }
+
+  if (await getUserByEmail(email)) {
     res.status(409).send({ msg: 'Existing user' });
     return;
   }
 
-  const user = await createUser(req.body.email, req.body.password);
-  setAuthCookie(res, user);
+  const user = await createUser(email, password);
+  const token = uuidv4();
+  try {
+    await addUser({ ...user, token });
+  } catch (error) {
+    if (error.code === 11000) {
+      res.status(409).send({ msg: 'Existing user' });
+      return;
+    }
+    throw error;
+  }
+
+  setAuthCookie(res, token);
   res.send({ email: user.email });
 });
 
 app.put('/api/auth', async (req, res) => {
-  const user = await getUser('email', req.body.email);
-  if (user && (await bcrypt.compare(req.body.password, user.password))) {
-    setAuthCookie(res, user);
+  const { email, password } = req.body || {};
+  if (typeof email !== 'string' || !email || typeof password !== 'string' || !password) {
+    res.status(400).send({ msg: 'Email and password are required' });
+    return;
+  }
+
+  const user = await getUserByEmail(email);
+  if (user && (await bcrypt.compare(password, user.password))) {
+    const token = uuidv4();
+    await setUserToken(user.email, token);
+    setAuthCookie(res, token);
     res.send({ email: user.email });
   } else {
     res.status(401).send({ msg: 'Unauthorized' });
@@ -62,15 +83,13 @@ app.put('/api/auth', async (req, res) => {
 });
 
 app.delete('/api/auth', async (req, res) => {
-  const user = await getUser('token', req.cookies.token);
-  if (user) {
-    clearAuthCookie(res, user);
-  }
+  await removeUserToken(req.cookies.token);
+  clearAuthCookie(res);
   res.send({});
 });
 
 app.get('/api/user/me', async (req, res) => {
-  const user = await getUser('token', req.cookies.token);
+  const user = await getUserByToken(req.cookies.token);
   if (user) {
     res.send({ email: user.email });
   } else {
@@ -94,7 +113,24 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use((error, req, res, next) => {
+  console.error('Request failed:', error);
+  if (res.headersSent) {
+    next(error);
+    return;
+  }
+  res.status(500).json({ msg: 'Internal server error' });
+});
+
 const port = process.env.PORT || (process.argv.length > 2 ? process.argv[2] : 4000);
-app.listen(port, function () {
-  console.log(`Listening on port ${port}`);
+async function start() {
+  await connectToDatabase();
+  app.listen(port, function () {
+    console.log(`Listening on port ${port}`);
+  });
+}
+
+start().catch((error) => {
+  console.error(`Unable to start service: ${error.message}`);
+  process.exitCode = 1;
 });
