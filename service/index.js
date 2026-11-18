@@ -122,11 +122,11 @@ app.post('/api/leaderboard', async (req, res) => {
     word,
     length: word.length,
   };
-  const savedScore = await addLeaderboardScore(score);
+  const result = await addLeaderboardScore(score);
   const entries = await getLeaderboardEntries();
   res.status(201).json({
     entries: entries.map(formatLeaderboardScore),
-    latestScore: formatLeaderboardScore(savedScore),
+    latestScore: formatLeaderboardScore(result.score),
   });
 });
 

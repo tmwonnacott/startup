@@ -32,6 +32,14 @@ async function connectToDatabase() {
   await client.db('neverword').command({ ping: 1 });
   await userCollection.createIndex({ email: 1 }, { unique: true });
   await leaderboardCollection.createIndex({ length: -1, createdAt: -1 });
+  await leaderboardCollection.createIndex(
+    { normalizedWord: 1 },
+    {
+      name: 'unique_normalized_leaderboard_word',
+      unique: true,
+      partialFilterExpression: { normalizedWord: { $type: 'string' } },
+    },
+  );
 }
 
 function getUserByEmail(email) {
@@ -60,16 +68,56 @@ async function removeUserToken(token) {
 }
 
 async function addLeaderboardScore(score) {
-  const savedScore = { ...score, createdAt: new Date() };
-  await leaderboardCollection.insertOne(savedScore);
-  return savedScore;
+  const normalizedWord = score.word.toLowerCase();
+  const createdAt = new Date();
+  const previewScore = { ...score, createdAt };
+
+  const existingScore = await leaderboardCollection.findOne(
+    { word: score.word },
+    { collation: { locale: 'en', strength: 2 } },
+  );
+  if (existingScore) {
+    return { inserted: false, score: previewScore };
+  }
+
+  const savedScore = { ...previewScore, normalizedWord };
+  try {
+    await leaderboardCollection.insertOne(savedScore);
+    return { inserted: true, score: savedScore };
+  } catch (error) {
+    if (error.code === 11000) {
+      const duplicate = await leaderboardCollection.findOne({ normalizedWord });
+      if (duplicate) {
+        return { inserted: false, score: previewScore };
+      }
+    }
+    throw error;
+  }
 }
 
 async function getLeaderboardEntries() {
   return leaderboardCollection
-    .find({}, { projection: { _id: 0, username: 1, word: 1, length: 1, createdAt: 1 } })
-    .sort({ length: -1, createdAt: -1 })
-    .limit(10)
+    .aggregate([
+      { $sort: { length: -1, createdAt: -1 } },
+      {
+        $group: {
+          _id: { $toLower: '$word' },
+          entry: { $first: '$$ROOT' },
+        },
+      },
+      { $replaceRoot: { newRoot: '$entry' } },
+      { $sort: { length: -1, createdAt: -1 } },
+      { $limit: 10 },
+      {
+        $project: {
+          _id: 0,
+          username: 1,
+          word: 1,
+          length: 1,
+          createdAt: 1,
+        },
+      },
+    ])
     .toArray();
 }
 
