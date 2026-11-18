@@ -1,27 +1,34 @@
-const { MongoClient } = require('mongodb');
-const config = require('./dbConfig.json');
+import { readFile } from 'node:fs/promises';
+import { MongoClient } from 'mongodb';
 
-const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
+const config = JSON.parse(await readFile(new URL('./dbconfig.json', import.meta.url), 'utf8'));
+const hostname = config.hostname.replace(/^@+/, '').replace(/\/+$/, '');
 
+if (!config.userName || !config.password || !hostname) {
+  throw new Error('dbconfig.json must provide userName, password, and hostname.');
+}
+
+const url = `mongodb+srv://${encodeURIComponent(config.userName)}:${encodeURIComponent(config.password)}@${hostname}`;
 const client = new MongoClient(url);
-const db = client.db('rental');
-const collection = db.collection('house');
 
 async function main() {
   try {
-    // add all the following database code here
+    await client.connect();
+    const collection = client.db('rental').collection('house');
     const house = {
-        name: 'Beachfront views',
-        summary: 'From your bedroom to the beach, no shoes required',
-        property_type: 'Condo',
-        beds: 1,
-        };
+      name: 'Beachfront views',
+      summary: 'From your bedroom to the beach, no shoes required',
+      property_type: 'Condo',
+      beds: 1,
+    };
     const insertResult = await collection.insertOne(house);
-
-
+    console.log(`Connected to MongoDB. Inserted house with _id: ${insertResult.insertedId}`);
   } finally {
-    client.close();
+    await client.close();
   }
 }
 
-main();
+main().catch((error) => {
+  console.error('MongoDB connection or insert failed:', error.message);
+  process.exitCode = 1;
+});
